@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio_Jyoti-Rautela</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="home-page">
+  <!-- Header -->
+  <header class="header">
+    <a href="index.html" class="link-group" aria-label="Go to home" data-cursor="Takes you home">
+      <span class="menu-text">MENU</span>
+    </a>
+
+    <div id="hover-banner" class="hover-banner" aria-hidden="true">
+      <span class="hover-text"></span>
+    </div>
+
+    <a href="https://jrautela0398-oxemu.wordpress.com/" target="_blank" rel="noopener" class="link-group"
+       aria-label="Go to write page" data-cursor="Takes you to my writing nook">
+      <span class="write-text">WRITE</span>
+    </a>
+  </header>
+
+  <!-- Big name banner (decorative) -->
+<div class="name-banner" aria-hidden="true">
+  <span class="name-left">JYOTI</span>
+
+  <div class="name-center">
+    <h2 class="nc-title">She is a Critical Technologist working at the intersection</h2>
+      <h3 class="nc-title">of society, AI engineering, and Speculative Design</h3>
+    <p class="nc-sub">Science · Design · Culture</p>
+  </div>
+
+  <span class="name-right">RAUTELA</span>
+</div>
+
+<!-- Page tags -->
+<div class="page-tags" aria-hidden="true">
+  <span class="tag tag-projects">projects ></span>
+  <span class="tag tag-approach">**interdisciplinary approach</span>
+</div>
+
+
+
+  <!-- Gallery -->
+  <section class="hero-gallery" aria-label="Featured projects">
+    <a class="tile t1 tile--intrinsic" href="projects/uno.html" rel="noopener"
+       data-title="Retro Walk"
+       data-cursor="Retro Walk — Smart Insole for Postural Imbalance in Elders&#10;Type: Mobility Project &#10;Role: Researcher & Designer&#10;Year: 2019">
+      <img src="public/Retro Walk img1.png" alt="UNO poster" loading="lazy">
+    </a>
+
+    <a class="tile t5" href="projects/scooter.html"  rel="noopener"
+       data-title="MOTION GRAPHIC"
+       data-cursor="Short write-up about this project&#10;Type: Industrial Design&#10;Role: Sr. Designer&#10;Year: 2024">
+      <img src="public/pp3-2.jpg" alt="Motion graphic frame" loading="lazy">
+    </a>
+
+    <a class="tile t6" href="projects/neomind.html" rel="noopener"
+       data-title="ARCHITECTURAL DETAIL"
+       data-cursor="Short write-up about this project&#10;Type: Footwear&#10;Role: Designer&#10;Year: 2024">
+      <img src="public/pp3-4.jpg" alt="Architectural detail" loading="lazy">
+    </a>
+
+    <a class="tile t7" href="projects/insanehabits.html" rel="noopener"
+       data-title="POSTER — MAKE IT HAPPEN"
+       data-cursor="Short write-up about this project&#10;Type: Mobility&#10;Role: Tester&#10;Year: 2025">
+      <img src="public/pp2-4.jpg" alt="Poster: Make it Happen" loading="lazy">
+    </a>
+  </section>
+
+  <!-- Cursor pill -->
+  <div id="cursor-hint" class="cursor-hint" aria-hidden="true"></div>
+
+  <!-- Script -->
+  <script>
+  (() => {
+    const banner  = document.getElementById('hover-banner');
+    const textEl  = banner?.querySelector('.hover-text');
+    const gallery = document.querySelector('.hero-gallery');
+    const header  = document.querySelector('.header');
+    const hint    = document.getElementById('cursor-hint');
+
+    const titleOf = el =>
+      (el.dataset.title || el.getAttribute('aria-label') || el.title ||
+       el.querySelector('img')?.alt || 'Project').trim();
+    const writeOf = el =>
+      (el.dataset.cursor || titleOf(el)).trim();
+
+    // --- Cursor pill follow ---
+    let hintTimer;
+    function showHint(txt){
+      if (!hint || !txt) return;
+      clearTimeout(hintTimer);
+      hint.textContent = txt;
+      hintTimer = setTimeout(() => hint.classList.add('show'), 80);
+    }
+    function hideHint(){
+      if (!hint) return;
+      clearTimeout(hintTimer);
+      hint.classList.remove('show');
+    }
+    if (hint){
+      addEventListener('pointermove', e => {
+        const m=8, o=14, w=hint.offsetWidth||0, h=hint.offsetHeight||0;
+        let x=Math.min(Math.max(m, e.clientX+o), innerWidth -w -m);
+        let y=Math.min(Math.max(m, e.clientY+o), innerHeight-h -m);
+        hint.style.setProperty('--tx', x+'px');
+        hint.style.setProperty('--ty', y+'px');
+      }, {passive:true});
+    }
+
+    // --- Header (MENU/WRITE) hint ---
+    header.addEventListener('pointermove', e => {
+      const el = e.target.closest('[data-cursor]');
+      el ? showHint(el.dataset.cursor || el.getAttribute('aria-label') || el.textContent || '')
+         : hideHint();
+    }, {passive:true});
+    header.addEventListener('pointerleave', hideHint);
+
+    // --- Gallery delegated hover/focus ---
+    let active = null;
+
+    gallery.addEventListener('pointerover', e => {
+      const tile = e.target.closest('.tile');
+      if (!tile || tile === active) return;
+      if (active) active.classList.remove('is-active');
+      active = tile;
+      tile.classList.add('is-active');
+      if (banner && textEl){
+        textEl.textContent = titleOf(tile);
+        banner.classList.add('show');
+      }
+      showHint(writeOf(tile));
+    });
+
+    gallery.addEventListener('pointerout', e => {
+  if (!active) return;
+  const to = e.relatedTarget;
+  const movingToTile = to && to.closest && to.closest('.tile');
+  if (movingToTile) return; // moving into another tile — keep active; next pointerover will switch
+  active.classList.remove('is-active'); // moved to gap or outside gallery — clear
+  active = null;
+  banner?.classList.remove('show');
+  hideHint();
+});
+
+    gallery.addEventListener('focusin', e => {
+      const tile = e.target.closest('.tile');
+      if (!tile) return;
+      if (active) active.classList.remove('is-active');
+      active = tile;
+      tile.classList.add('is-active');
+      if (banner && textEl){
+        textEl.textContent = titleOf(tile);
+        banner.classList.add('show');
+      }
+      showHint(writeOf(tile));
+    });
+
+    gallery.addEventListener('focusout', e => {
+      if (gallery.contains(e.relatedTarget)) return;
+      if (active) active.classList.remove('is-active');
+      active = null;
+      banner?.classList.remove('show');
+      hideHint();
+    });
+
+
+  })();
+  </script>
+
+<script>
+(function() {
+  const leftWord  = document.querySelector('.name-banner .name-left');
+  const rightWord = document.querySelector('.name-banner .name-right');
+  const centerBox = document.querySelector('.name-banner .name-center');
+  if (!leftWord || !rightWord || !centerBox) return;
+
+  function positionCenter() {
+    const L = leftWord.getBoundingClientRect();   // JYOTI box
+    const R = rightWord.getBoundingClientRect();  // RAUTELA box
+
+    // Midpoint of the gap between the two words (viewport coords)
+    const gapMidX = (L.right + R.left) / 2;
+
+    // Place the center box at that x (relative to the viewport)
+    centerBox.style.position = 'fixed';            // ensures left is viewport-based
+    centerBox.style.left = gapMidX + 'px';
+    centerBox.style.transform = 'translateX(-50%)';
+  }
+
+  // Run now, on resize, and after fonts load (so metrics are correct)
+  positionCenter();
+  window.addEventListener('resize', positionCenter, { passive: true });
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(positionCenter);
+  } else {
+    // Small delay fallback if Font Loading API isn't available
+    setTimeout(positionCenter, 100);
+  }
+})();
+</script>
+
+
+  <div class="edge-footer">
+    <span class="v-label">DESIGN -></span>
+    <span class="h-label">++ -></span>
+    </div>
+
+</body>
+</html>

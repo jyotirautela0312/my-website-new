@@ -1,0 +1,1434 @@
+/* ---------- Base & grid background ---------- */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+:root{
+  --grid: clamp(12px, 2.2vw, 24px);
+  --grid-lg: calc(var(--grid) * 5);
+  --grid-subdivs: 4;
+  --grid-sub: calc(var(--grid) / var(--grid-subdivs));
+  --grid-line: rgba(0,255,255,.04);
+  --grid-line-lg: rgba(0,255,255,.04);
+  --grid-line-micro: rgba(0,255,255,.04);
+  --page-gutter: clamp(8px, 1vw, 30px);
+  --rule-width: 97vw;          /* use 96vw like your big images */
+}
+
+body{
+  margin: 0;
+  background: #fcfdf8;
+  background-image:
+    linear-gradient(to right, var(--grid-line-lg) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-lg) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line-micro) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-micro) 1px, transparent 1px);
+  background-size:
+    var(--grid-lg) var(--grid-lg),
+    var(--grid-lg) var(--grid-lg),
+    var(--grid)    var(--grid),
+    var(--grid)    var(--grid),
+    var(--grid-sub) var(--grid-sub),
+    var(--grid-sub) var(--grid-sub);
+}
+
+/* ---------- Header ---------- */
+.header{
+  position: sticky; top: 6px; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding-block: 8px; padding-inline: clamp(8px, 1vw, 30px);
+  width: 100%;
+}
+
+.header .link-group{
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: #000; font-weight: 400;
+}
+
+.menu-text,.write-text{
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(9px, 1.1vw, 12px);
+  transition: letter-spacing .14s ease, opacity .14s ease;
+}
+.header .link-group:hover .menu-text,
+.header .link-group:hover .write-text{ letter-spacing: .3px; opacity: .9; }
+
+/* ---------- Gallery & tiles ---------- */
+.hero-gallery{
+  position: relative; z-index: 1; isolation: isolate;
+  width: 92vw;
+  margin: clamp(24px, 6vh, 80px) auto clamp(48px, 12vh, 160px);
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: clamp(16px, 2vw, 32px);
+  row-gap: clamp(48px, 6vh, 100px);
+  justify-items: center;
+  padding-inline: 4vw;
+  --tile-max: 40px;              /* adjust this to control desktop tile size */
+}
+
+.t1{ position: relative; top: 28px; grid-column: 1 / span 2; grid-row: 2; margin: 1px 2px 18px 48px; --nudge-y: -8vh; }
+.t5{ grid-column: 4 / span 2; grid-row: 2; transform: translateY(-8px); margin: 26px 10px 8px 20px;}
+.t6{ grid-column: 6 / span 2; grid-row: 4; margin: 4px 18px 12px 8px;}
+.t7{ position: relative; left: -24px; top: 100px; grid-column: 8 / span 2; grid-row: 1; --nudge-x: 0; --nudge-y: 20vh }
+
+.tile{
+  position: relative;
+  width: min(100%, var(--tile-max));
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  contain: paint;
+  transform-origin: center center;
+  transition: transform .25s ease;
+  box-shadow: none;
+  z-index: auto;
+}
+
+/* Grow hovered/focused tile in place (no lift) and dim others */
+.hero-gallery:has(.tile.is-active) .tile.is-active{
+  transform: scale(1.12);
+  opacity: 1;
+  filter: none;
+  z-index: auto;
+}
+.hero-gallery:has(.tile.is-active) .tile{
+  opacity: .22;
+  filter: grayscale(80%) brightness(1.08);
+  transition: opacity .25s ease, filter .25s ease, transform .25s ease;
+}
+
+/* Image stays unscaled; only grayscale transitions */
+.tile img{
+  width: 100%; height: 100%; display: block; object-fit: cover;
+  transform: none !important;
+  transition: filter .24s ease;
+  filter: grayscale(100%);
+}
+.hero-gallery:has(.tile.is-active) .tile.is-active img{ filter: grayscale(0%); }
+
+/* Keyboard outline */
+.tile:focus-visible{ outline: 2px solid #000; outline-offset: 4px; }
+
+/* ---------- Hover banner (title above gallery) ---------- */
+.hover-banner{
+  position: absolute; left: 50%; top: calc(100% + 4px);
+  transform: translateX(-50%);
+  display: flex; align-items: center; gap: 8px;
+  pointer-events: none;
+  opacity: 0; transition: opacity .18s ease;
+  z-index: 300;
+}
+.hover-banner.show{ opacity: 1; }
+
+.hover-banner .hover-text{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 21px; font-weight: 600; letter-spacing: .3px;
+  text-transform: uppercase; color: #000;
+}
+
+/* ---------- Cursor hint pill ---------- */
+.cursor-hint{
+  position: fixed; z-index: 1000; top: 0; left: 0;
+  transform: translate3d(var(--tx,0px), var(--ty,0px), 0);
+  padding: 10px 12px; background: #efeded; color: #111;
+  box-shadow: 0 6px 24px rgba(0,0,0,.14);
+  font: 400 12px/1.35 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  pointer-events: none; max-width: 320px; white-space: pre-line;
+  border-radius: 2px; opacity: 0;
+  transition: opacity .12s ease, transform .08s ease;
+}
+.cursor-hint.show{ opacity: .95; }
+@media (any-hover: none){ .cursor-hint{ display: none !important; } }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px){
+  .hero-gallery{
+    grid-template-columns: repeat(2, 1fr);
+    --tile-max: 100px;
+    gap: 16px; row-gap: 32px;
+  }
+  .t1,.t5,.t6,.t7{ grid-column: auto; grid-row: auto; transform: none; margin: 0; }
+}
+@media (min-width: 1400px){
+  .hero-gallery{ --tile-max: 96px; }   /* tweak large-screen density */
+}
+@media (max-width: 600px){
+  .menu-text, .write-text{ font-size: 10px; font-weight: 300; letter-spacing: .02em; }
+  .hover-banner{ top: calc(100% + 3px); }
+  .hover-banner .hover-text{
+    max-width: 88vw; text-align: center;
+    font-size: 14px; font-weight: 500; letter-spacing: .2px; line-height: 1.15;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .tile, .menu-text, .write-text { transition: none; }
+}
+
+/* ==== Project page layout (scoped) ==== */
+.project-page .project-main{
+  margin: clamp(24px, 6vh, 80px) auto 8vh;
+}
+
+/* HERO block: centered, same “division” as your reference */
+.project-page .project-hero{
+  width: min(82vw, 1200px);   /* adjust 82 → 80/78 if you want a bit narrower */
+  margin: 0 auto;
+}
+.project-page .project-hero img{
+  max-height: 58vh;   /* tweak this number: smaller = shorter */
+  max-width: 170vw;        /* shrink width proportionally */
+  display: block;
+  margin: 0 auto;
+}
+
+/* Meta row directly under the hero (left label, right year) */
+.project-page .project-meta{
+  width: min(82vw, 1200px);
+  margin: 10px auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Sora', sans-serif;
+  font-size: 10px;
+  letter-spacing: .02em;
+  color: #000;
+  text-transform: none; /* keep as provided */
+}
+
+/* Thin divider under the meta row */
+.project-page .project-divider{
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.55);
+  width: var(--rule-width);
+  margin: 0 auto clamp(18px, 3vh, 32px);
+}
+
+
+/* Body content flows/scrolls naturally below */
+.project-page .project-body{
+  width: min(82vw, 900px);
+  margin: 0 auto;
+  font: 400 16px/1.6 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #111;
+}
+
+/* Mobile tweaks */
+@media (max-width: 900px){
+  .project-page .project-hero,
+  .project-page .project-meta{ width: 92vw; }
+  .project-page .project-body{ width: 92vw; }
+}
+
+.uno-page .project-hero{
+  width: min(180vw, 1000px);   /* make the block narrower */
+  margin: 0 auto;
+}
+
+.uno-page .project-hero img{
+  max-height: 70vh;          /* make it shorter */
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;            /* keep centered */
+}
+
+/* UNO page: large intro block + placement */
+.uno-page .project-body{
+  width: calc( (60vw + min(64vw, 1000px)) / 2 - clamp(8px, 1vw, 30px) );
+  margin: 8vh 0 8vh clamp(8px, 1vw, 30px);      /* space above/below */
+  text-align: left;
+}
+
+.uno-page .project-body p{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 650;                     /* uses your loaded weight */
+  font-size: clamp(6px, 2.4vw, 32px);  /* big responsive type */
+  line-height: 1.05;                    /* tight multi-line look */
+  letter-spacing: -0.01em;
+  margin: 0;                            /* one solid block */
+}
+
+/* mobile tweak */
+@media (max-width: 900px){
+  .uno-page .project-body{ width: 92vw; margin: 4vh auto 8vh; }
+  .uno-page .project-body p{
+    font-size: clamp(18px, 6.2vw, 34px);
+    line-height: 1.15;
+  }
+}
+
+/* UNO: first line starts where the meta title starts */
+.uno-page .project-body p:first-child{
+  text-indent: calc(
+    (100vw - min(82vw, 1200px)) / 2     /* left edge of meta/hero block */
+    - clamp(8px, 1vw, 30px)             /* your page gutter (MENU line) */
+  );
+}
+
+/* UNO: make the labels row match the big text width/offset */
+.uno-page .project-submeta{
+  /* same left start (MENU gutter) and same right end as the big text */
+  width: calc( (100vw + min(64vw, 1000px)) / 2 - clamp(8px, 1vw, 30px) );
+  margin: 0 0 18px clamp(8px, 1vw, 30px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Sora', sans-serif;
+  font-size: 10px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+/* UNO: align "OBJECTIVE" with the hero/meta left guide */
+.uno-page .project-submeta span:first-child{
+  margin-left: calc(
+    (100vw - min(82vw, 1200px)) / 2   /* hero/meta left edge */
+    - clamp(8px, 1vw, 30px)           /* current body left gutter */
+  );
+}
+
+/* UNO: pull "THE PROJECT" slightly left */
+.uno-page .project-submeta span:last-child{
+  margin-right: 180px;   /* tweak: 8–24px to taste */
+}
+
+
+@media (max-width: 900px){
+  .project-page .project-submeta{ width: 92vw; }
+}
+
+/* UNO: two-column block under the lower divider */
+.uno-page .project-detail{
+  /* same right edge as the big paragraph */
+  width: calc( (100vw + min(64vw, 1000px)) / 2 - clamp(8px, 1vw, 30px) );
+  margin: 0 0 8vh clamp(8px, 1vw, 30px); /* same left gutter (MENU line) */
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: clamp(16px, 4vw, 64px);
+}
+
+.uno-page .project-detail .col-left{
+  /* align left column under the OBJECTIVE guide (hero/meta left edge) */
+  margin-left: calc(
+    (100vw - min(82vw, 1200px)) / 2  /* hero/meta left edge */
+    - clamp(8px, 1vw, 30px)          /* subtract body gutter */
+  );
+  flex: 0 0 220px; /* width of the small left column (adjust if needed) */
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  line-height: 1.3;
+  color: #000;
+}
+
+.uno-page .project-detail .col-right{
+  flex: 1 1 auto;
+  font: 400 16px/1.6 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #111;
+}
+
+/* UNO: align "OBJECTIVE" to the MENU line */
+.uno-page .project-submeta span:first-child{
+  margin-left: 0 !important;
+}
+
+/* UNO: align the left two-line block ("DESIGN, PROTOTYPE") to the MENU line */
+.uno-page .project-detail .col-left{
+  margin-left: 0 !important;
+}
+
+/* UNO: align the paragraph with "THE PROJECT" (same right offset) */
+.uno-page .project-detail .col-right{
+  flex: 0 0 auto;                 /* don't stretch */
+  width: min(32vw, 560px);        /* adjust width if you want */
+  margin-left: auto;              /* push to the right side */
+  margin-right: -235px;            /* SAME as the label's margin-right */
+}
+
+/* UNO: adjust line height for paragraph under "THE PROJECT" */
+.uno-page .project-detail .col-right p{
+  line-height: 1.35;  /* try 1.3–1.6 to taste */
+}
+
+.uno-page .project-detail .col-right p{ margin-top: 0; }
+
+/* UNO: make the right paragraph bolder */
+.uno-page .project-detail .col-right p{
+  font-weight: 500;   /* try 600 (semi-bold) or 900 (extra-bold) */
+}
+
+/* same small gap below the paragraph block as above DESIGN/PROTOTYPE */
+.uno-page .project-detail{ margin-bottom: 20px; } /* change 20px if your chosen gap is different */
+
+/* big, almost-full-width image with small left/right margins */
+.uno-page .project-wide{
+  width: 96vw;              /* small margins on both sides */
+  margin: 0 auto 8vh;       /* centered; keep some bottom space */
+}
+.uno-page .project-wide img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* UNO: three images dividing the width */
+.uno-page .project-triple{
+  width: 96vw;                       /* same side margins as your big image */
+  margin: 6vh auto;                  /* space above/below the row */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(12px, 2vw, 28px);       /* space between images */
+}
+
+.uno-page .project-triple img{
+  display: block;
+  width: 100%;
+  height: 90vh;                      /* keeps original proportions */
+  object-fit: cover;
+}
+
+/* optional: responsive stacking */
+@media (max-width: 900px){
+  .uno-page .project-triple{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px){
+  .uno-page .project-triple{ grid-template-columns: 1fr; }
+}
+
+.uno-page .project-triple img:first-of-type{ object-position: 50% 40%; } /* move focus up */
+.uno-page .project-triple img:last-of-type { object-position: center;   }
+
+@media (min-width: 901px){
+  .uno-page .project-triple{ grid-template-columns: repeat(3, 1fr); }
+  .uno-page .project-triple img:nth-of-type(1){ grid-column: 1; } /* left */
+  .uno-page .project-triple img:nth-of-type(2){ grid-column: 3; } /* right */
+}
+
+/* UNO: description block aligned like the first PROJECT paragraph */
+.uno-page .project-desc{
+  /* same right-column width & right offset you set for THE PROJECT */
+  width: min(32vw, 560px);
+  margin-left: auto;
+  margin-right: 20px;     /* ← keep in sync with your PROJECT label offset */
+  margin-top: 4vh;
+  margin-bottom: 8vh;
+}
+
+.uno-page .project-desc p{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 500;        /* same weight you used earlier */
+  font: 400 16px/1.6 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.35;       /* tweak if you changed it above */
+  margin: 0;
+}
+
+/* === UNO: Results box (left text, right carousel, footer with controls) === */
+.uno-page .result-box{
+  width: 96vw;                /* same side margins as your wide images */
+  margin: 8vh auto;
+  border: 1px solid rgba(0,0,0,.6);
+  background: transparent;
+}
+
+.uno-page .result-box .rb-grid{
+  display: grid;
+  grid-template-columns: 58% 42%;
+  grid-template-rows: auto auto; /* content + footer */
+}
+
+.uno-page .result-box .rb-left{
+  padding: clamp(16px,2vw,28px) clamp(18px,2.2vw,32px);
+}
+
+.uno-page .result-box .rb-right{
+  border-left: 1px solid rgba(0,0,0,.6);
+  padding: clamp(8px,1.6vw,24px);
+}
+
+.uno-page .result-box .rb-viewport{
+  position: relative;
+  width: 100%;
+  height: min(54vh, 540px);     /* adjust carousel height here */
+  overflow: hidden;
+}
+.uno-page .result-box .rb-slide{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;            /* or 'contain' if you prefer */
+  opacity: 0; transition: opacity .25s ease;
+  pointer-events: none;
+}
+.uno-page .result-box .rb-slide.is-active{
+  opacity: 1; pointer-events: auto;
+}
+
+.uno-page .result-box .rb-kicker{
+  font-family: 'Sora', sans-serif;
+  font-size: 12px; letter-spacing: .02em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.uno-page .result-box .rb-headline{
+  margin: 0 0 24px 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 900;
+  font-size: clamp(22px, 3.6vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.uno-page .result-box .rb-desc{
+  margin: 0;
+  font: 600 16px/1.5 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .uno-page .result-box .rb-grid{
+    grid-template-columns: 1fr; /* stack */
+  }
+  .uno-page .result-box .rb-right{
+    border-left: none; border-top: 1px solid rgba(0,0,0,.6);
+  }
+  .uno-page .result-box .rb-viewport{ height: 42vh; }
+}
+
+/* Right column becomes a mini layout: viewport on top, footer at bottom */
+.uno-page .result-box .rb-right{
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+/* Footer lives inside .rb-right only */
+.uno-page .result-box .rb-right .rb-footer{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid rgba(0,0,0,.6);
+}
+
+/* Align like the reference */
+.uno-page .result-box .rb-right .rb-footer > *{
+  min-height: 76px;
+  display: flex; align-items: center; justify-content: center;
+}
+.uno-page .result-box .rb-right .rb-prev{
+  justify-content: flex-start;
+  padding-inline: clamp(16px,2vw,28px);
+  border-right: 1px solid rgba(0,0,0,.6);
+  background: transparent; border: 0; font-family: 'Sora', sans-serif; font-size: 12px; text-transform: uppercase; cursor: pointer;
+}
+.uno-page .result-box .rb-right .rb-count{
+  justify-content: center;
+  white-space: pre;
+  font-family: 'Sora', sans-serif; font-size: 12px; letter-spacing: .02em;
+}
+.uno-page .result-box .rb-right .rb-next{
+  justify-content: flex-end;
+  padding-inline: clamp(16px,2vw,28px);
+  border-left: 1px solid rgba(0,0,0,.6);
+  background: transparent; border: 0; font-family: 'Sora', sans-serif; font-size: 12px; text-transform: uppercase; cursor: pointer;
+}
+
+/* Safety: hide any footer accidentally outside .rb-right */
+.uno-page .result-box > .rb-footer{ display: none !important; }
+
+
+/* Right column becomes a mini layout: viewport on top, footer at bottom */
+.uno-page .result-box .rb-right{
+  display: grid;
+  grid-template-rows: auto auto; /* viewport, then footer */
+}
+
+
+/* Keep the alignment like your reference */
+.uno-page .result-box .rb-footer > *{
+  min-height: 76px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+
+/* === Results box — LEFT column spacing & typography === */
+.uno-page .result-box .rb-left{
+  /* bigger breathing room like your reference */
+  padding: clamp(32px, 5vw, 80px) clamp(28px, 3vw, 48px);
+}
+
+.uno-page .result-box .rb-kicker{
+  margin-bottom: clamp(6px, 1vw, 14px);
+}
+
+.uno-page .result-box .rb-headline{
+  /* make the headline bigger & tighter */
+  font-weight: 900;
+  font-size: clamp(12px, 2.5vw, 36px);  /* ← size knob */
+  line-height: 1.04;                    /* tighter lines */
+  letter-spacing: -0.015em;
+  max-width: 28ch;                      /* controls wrap width */
+  margin: 0 0 clamp(28px, 5vw, 80px);   /* gap to paragraph */
+}
+
+.uno-page .result-box .rb-desc{
+  /* paragraph width + size like ref */
+  max-width: 60ch;
+  font-weight: 500;
+  font-size: clamp(16px, 1.2vw, 16px); /* ← paragraph size knob */
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Move the left description down */
+.uno-page .result-box .rb-desc{
+  margin-top: clamp(100px, 7vw, 220px);  /* increase to push it further down */
+}
+
+/* Compact, framed 3-column footer inside the RIGHT panel */
+.uno-page .result-box .rb-right .rb-footer{
+  display: grid;
+  grid-template-columns: 0.5fr 0.9fr 0.5fr;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,.65);   /* full frame around the bar */
+  border-top-width: 1px;               /* keeps the split line feel */
+  margin-top: 12px;                    /* gap from the image above */
+  height: 56px;                        /* smaller bar height */
+  box-sizing: border-box;
+}
+
+.uno-page .result-box .rb-right .rb-footer > *{
+  height: 100%;                        /* fill the bar vertically */
+  display: flex;
+  align-items: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 9px;
+  letter-spacing: .02em;
+}
+
+/* left cell */
+.uno-page .result-box .rb-right .rb-prev{
+  justify-content: flex-start;
+  padding-inline: 18px;
+  border-right: 1px solid rgba(0,0,0,.65);  /* first vertical divider */
+  background: transparent; border: 0; cursor: pointer;
+}
+
+/* middle cell */
+.uno-page .result-box .rb-right .rb-count{
+  justify-content: center;
+  white-space: pre;                     /* "01 of 04" spacing intact */
+}
+
+/* right cell */
+.uno-page .result-box .rb-right .rb-next{
+  justify-content: flex-end;
+  padding-inline: 18px;
+  border-left: 1px solid rgba(0,0,0,.65);   /* second vertical divider */
+  background: transparent; border: 0; cursor: pointer;
+}
+
+/* neutralize any earlier tall min-heights */
+.uno-page .result-box .rb-right .rb-footer > *{ min-height: 0; }
+
+/* footer: exactly 3 columns with TWO inner dividers */
+.uno-page .result-box .rb-right .rb-footer{ gap: 0; }  /* no gaps, lines touch */
+
+.uno-page .result-box .rb-right .rb-footer > :nth-child(1),
+.uno-page .result-box .rb-right .rb-footer > :nth-child(2){
+  border-right: 1px solid rgba(0,0,0,.65) !important;  /* line after PREV and after 01 of 04 */
+}
+
+.uno-page .result-box .rb-right .rb-footer > :nth-child(3){
+  border-right: 0 !important;
+  border-left: 0 !important;  /* make sure NEXT doesn’t add its own side */
+}
+
+/* RB footer: dark hover for PREV / NEXT cells */
+.uno-page .result-box .rb-right .rb-prev,
+.uno-page .result-box .rb-right .rb-next{
+  background: transparent;
+  color: #111;
+  transition: background-color .18s ease, color .18s ease;
+  user-select: none;
+}
+
+.uno-page .result-box .rb-right .rb-prev:hover,
+.uno-page .result-box .rb-right .rb-prev:focus-visible,
+.uno-page .result-box .rb-right .rb-next:hover,
+.uno-page .result-box .rb-right .rb-next:focus-visible{
+  background: #111;   /* whole column goes black */
+  color: #fff;        /* label flips to white */
+}
+
+/* Center the PREV / NEXT labels inside their boxes */
+.uno-page .result-box .rb-right .rb-prev,
+.uno-page .result-box .rb-right .rb-next{
+  justify-content: center !important;   /* was flex-start / flex-end */
+  padding-inline: 0;                    /* no side bias */
+}
+
+.uno-page .scroll-show{ margin-bottom: 0 !important;}
+/* ===== Scroll-synced carousel ===== */
+.uno-page .scroll-show{ width:96vw; margin:6vh auto 0; }
+
+/* Scroll-show header: only one line BELOW; title vertically centered */
+.uno-page .scroll-show .ss-head{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;                 /* center STRESA block vertically */
+  gap: 12px;
+
+  /* symmetric vertical space so the title sits between the box above and the line below */
+  padding: clamp(8px, 1vh, 18px) 0;
+
+  /* remove the extra top line; keep only the line under the title */
+  border-top: none;
+  border-bottom: 1px solid rgba(0,0,0,.6);
+
+  /* optional: ensure enough area to “center” within */
+  min-height: clamp(14px, 1.5vh, 20px);
+}
+
+/* Scroll header arrows: sit close to the bottom rule */
+.uno-page .scroll-show .ss-prev,
+.uno-page .scroll-show .ss-next{
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font: 600 10px/1 'Sora', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+
+  align-self: end;          /* push down within the header row */
+  padding-bottom: 6px;      /* nudge closer to the bottom line */
+}
+
+.uno-page .scroll-show .ss-prev { justify-self: start; }
+.uno-page .scroll-show .ss-next { justify-self: end; }
+
+
+.uno-page .scroll-show .ss-title{ text-align:center; }
+.uno-page .scroll-show .ss-code,
+.uno-page .scroll-show .ss-sub{ font:600 10px/1 'Sora',sans-serif; letter-spacing:.02em; }
+.uno-page .scroll-show .ss-name{
+  margin:6px 0 2px; font:900 clamp(18px,3.2vw,36px)/1.05 'Inter',system-ui,sans-serif;
+}
+
+/* pin + horizontal track */
+.uno-page .scroll-show .ss-shell{ position:relative; height:auto; } /* JS recalculates */
+/* Stack the track and the bottom line vertically */
+.uno-page .scroll-show .ss-sticky{
+  position: sticky;
+  top: 0;
+  height: calc(
+    var(--ss-gap) + var(--ss-thumb) + var(--ss-caption) + var(--ss-caption-gap) + var(--ss-gap));
+  overflow: hidden;
+  display: block;
+  padding: 0 clamp(8px,2vw,24px);
+  --ss-gap: 14px; /* tweak to taste */
+  overscroll-behavior: contain;
+}
+
+
+/* shared gap above/below the carousel lines */
+.uno-page .scroll-show{ 
+  --ss-gap: 24px;
+  --ss-thumb: clamp(80px, 18vh, 160px);
+  --ss-caption: 16px;
+  --ss-caption-gap: 6px;
+
+}
+
+
+/* The track is *absolutely positioned* inside the viewport.
+   It no longer contributes to page width, so no bottom scrollbar. */
+.uno-page .scroll-show .ss-track{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--ss-gap);            /* keeps the top line above the thumbs */
+  display: flex;
+  gap: clamp(10px, 1.2vw, 20px);
+  list-style: none;
+  margin: 0;
+  padding: 0;                    /* IMPORTANT: no padding here */
+  white-space: nowrap;
+  will-change: transform;
+  transition: transform 60ms linear;
+  z-index: 1;
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0);
+}
+
+
+
+
+/* line directly BELOW the carousel, same weight and distance as the top line */
+.uno-page .scroll-show .ss-bottomline{
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px solid rgba(0,0,0,.6);
+  pointer-events: none;
+  z-index: 0; /* set to 0 if you prefer the line UNDER the images */
+  top: calc(var(--ss-gap) + var(--ss-thumb) + var(--ss-caption) + var(--ss-caption-gap));
+}
+
+
+
+.uno-page .scroll-show .ss-item:hover img{ filter:none; }
+.uno-page .scroll-show .ss-item span{
+  display:block; text-align:center; margin-top: var(--ss-caption-gap);
+  font:600 10px/1 'Sora',sans-serif;
+}
+
+/* (optional) make wheel-hover translate to vertical scroll by default behavior */
+
+/* Each item is a constant width ≈ 3cm; height varies naturally per image */
+.uno-page .scroll-show .ss-item{
+  flex: 0 0 3cm;                     /* ~113px on screen; constant width */
+}
+
+/* Keep aspect ratio (no crop), let height vary; cap max-height for row feel */
+.uno-page .scroll-show .ss-item img{
+  width: 100%;
+  height: auto;                      /* keep natural aspect ratio */
+  max-height: clamp(80px, 18vh, 160px); /* uneven heights, but not runaway tall */
+  object-fit: contain;               /* no cropping */
+  display: block;
+
+  filter: grayscale(100%);
+  transition: filter .2s ease;
+}
+.uno-page .scroll-show .ss-item:hover img{ filter:none; }
+
+/* === End 3-column grid under the carousel === */
+/* Footer 3-col block aligned to MENU/WRITE guides, center truly centered */
+.uno-page .end-grid{
+  width: 100vw;
+  margin-top: var(--ss-gap);
+  margin-bottom: 0;
+  margin: calc(var(--ss-gap, 10px)) 0 0;                 /* same top gap as above */
+  padding: clamp(10px, 2.4vw, 6px) var(--page-gutter);  /* ← left/right = header guides */
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 620px) 1fr;       /* cap center width as you like */
+  column-gap: clamp(18px, 3vw, 48px);
+  align-items: start;
+}
+
+/* Column alignment */
+.uno-page .end-left   { justify-self: start; text-align: left;  }
+.uno-page .end-center { justify-self: center; text-align: center; }
+.uno-page .end-right  { justify-self: end; text-align: right; padding-right: var(--page-gutter); }
+
+
+.uno-page .end-col{ min-width: 0; }
+
+.uno-page .end-kicker{
+  font-family: 'Sora', sans-serif;
+  font-size: 10px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  margin-bottom: clamp(6px, 0.9vw, 10px);
+}
+
+.uno-page .end-block .end-strong,
+.uno-page .end-list .end-strong{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 700;
+  font-size: clamp(14px, 1.3vw, 18px);   /* was bigger */
+  line-height: 1;
+}
+
+.uno-page .end-block .end-strong + .end-strong{ margin-top: .35em; }
+
+.uno-page .end-small{
+  margin-top: clamp(14px, 2vw, 18px);
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  letter-spacing: .02em;
+}
+
+.uno-page .end-title{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 700;
+  font-size: clamp(14px, 1.3vw, 18px);
+  line-height: 1;
+  margin-bottom: clamp(8px, 1vw, 18px);
+}
+
+.uno-page .end-link{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 800;
+  text-decoration: none;
+  color: #000;
+  display: inline-block;
+  margin-bottom: clamp(10px, 1.2vw, 14px);
+}
+
+
+.uno-page .end-list a{
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+.uno-page .end-list a + a{ margin-top: .35em; }
+
+.uno-page .end-credits{ display: inline-block; margin-top: clamp(14px, 2vw, 18px); }
+
+
+/* Responsive stacking */
+@media (max-width: 900px){
+  .uno-page .end-grid{ grid-template-columns: 1fr; }
+  .uno-page .end-center{ order: -1; } /* bring the center block first on mobile */
+}
+
+/* Pull the footer closer to the carousel */
+
+
+/* If you added the 3-column footer earlier, reduce its top padding */
+.page-footer{
+  padding-top: clamp(2px, 1vh, 12px);   /* was larger; tighten it to kill the big empty area */
+}
+
+
+.scroll-show { margin-bottom: clamp(12px, 2.5vh, 24px); }
+
+.page-footer { padding-top: clamp(12px, 2.5vh, 24px); }
+
+
+.scroll-show{ margin-bottom:0 !important; }
+
+/* Hide the red dot on the UNO page */
+.uno-page .end-dot { 
+  display: none !important; 
+}
+
+.uno-page .end-center .end-dot { margin-top: 0 !important; }
+
+/* Tighten vertical space for the gallery strip */
+.hero-gallery{
+  /* LESS space above and below */
+  margin-block: 12px 16px;        /* was something like clamp(24px, 6vh, 80px) auto clamp(48px, 12vh, 160px) */
+  padding-block: 0;
+
+  /* If you had a fixed/min height, kill it so the box hugs its content */
+  height: auto !important;
+  min-height: 0 !important;
+
+  /* If the container does have a height, keep tracks at the top */
+  align-content: start;
+
+  /* If you want even tighter spacing between items */
+  row-gap: 8px;                   /* or 0 */
+}
+
+/* Optional: make thumbs a bit shorter to visually reduce the band */
+.hero-gallery .tile{ 
+  --tile-max: 80px;
+  translate: var(--nudge-x, 0) var(--nudge-y, 0);
+}  /* adjust to taste */
+
+/* Align FOLLOW block exactly with header WRITE */
+.uno-page .end-grid .end-right{
+  justify-self: end;     /* stay on the right grid edge */
+  text-align: right;
+  padding-right: 0 !important;  /* ← remove extra inner padding */
+  margin-right: 0 !important;   /* safety: no extra offset */
+}
+
+.uno-page .end-grid .end-left  { grid-column: 1; }
+.uno-page .end-grid .end-right { grid-column: 3; }
+
+/* Footer grid should use the same width model as the header */
+.uno-page .end-grid{
+  width: 100%;                          /* was 100vw */
+  padding: 10px var(--page-gutter);     /* keep same right/left gutter as header */
+}
+
+/* Explicit column placement (you already added, keep it) */
+.uno-page .end-grid .end-left  { grid-column: 1; }
+.uno-page .end-grid .end-right { grid-column: 3; }
+
+/* Right edge of FOLLOW must sit on the gutter exactly */
+.uno-page .end-grid .end-right{
+  justify-self: end;        /* hug the container’s right edge */
+  text-align: right;        /* text’s right edge = box’s right edge */
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Remove any earlier rule that nudged it inward */
+.uno-page .end-right { padding-right: 0 !important; }
+
+
+
+/* The meta row is THE sticky bar */
+.project-page .project-meta{
+  position: sticky;
+  top: 0;
+  z-index: 500;
+
+  /* your existing centered width */
+  width: min(82vw, 1200px);
+  margin: 0 auto;
+  padding-block: 6px;
+
+  /* single-line layout: MENU | title | 2024 | WRITE */
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  column-gap: 10px;
+
+  /* full-bleed white background without overflow problems */
+  background: #fcfdf8;                       /* bar color */
+  box-shadow: 0 0 0 100vmax #fcfdf8;         /* extend bg to viewport edges */
+  clip-path: inset(0 -100vmax);              /* allow the bleed to render */
+}
+
+/* underline stays with the bar */
+.project-page .project-meta::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  width: var(--rule-width);
+  border-top: 1px solid rgba(0,0,0,.55);
+}
+
+/* title centered */
+.project-page .project-title{ 
+  text-align: center; 
+  justify-self: center; 
+}
+
+/* MENU/WRITE inside the bar — hidden until the bar reaches top */
+.project-page .meta-menu,
+.project-page .meta-write{
+  font-family: 'Sora', sans-serif;
+  font-size: 10px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  display: none;                              /* default hidden */
+}
+.project-page .meta-menu  { justify-self: start; }
+.project-page .meta-write { justify-self: end; }
+
+/* When stuck at the very top, show MENU/WRITE (one row total) */
+body.meta-stuck .project-page .meta-menu,
+body.meta-stuck .project-page .meta-write{ display: inline; }
+
+/* We draw the rule with ::after now */
+.project-page .project-divider{ display: none !important; }
+
+.project-page .header{
+  position: absolute !important;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+  background: transparent;
+}
+
+/* === The ONE sticky bar === */
+.project-page .project-meta{
+  position: sticky;
+  top: 0;
+  z-index: 500;
+
+  /* your centered content width */
+  width: min(82vw, 1200px);
+  margin: 0 auto;
+  padding-block: 6px;
+
+  /* single-row layout: MENU | title | year | WRITE */
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  column-gap: clamp(16px, 3vw, 48px);
+
+  /* full-bleed white background (no viewport gaps, no scrollbar math) */
+  background: #fcfdf8;
+  box-shadow: 0 0 0 100vmax #fcfdf8;  /* bleed to edges */
+  clip-path: inset(0 -100vmax);
+
+  /* keep your fonts/size from earlier rules */
+}
+
+/* underline that travels with the bar */
+.project-page .project-meta::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  width: var(--rule-width);
+  border-top: 1px solid rgba(0,0,0,.55);
+}
+
+/* title centered perfectly */
+.project-page .project-title{
+  justify-self: center;
+  text-align: center;
+}
+
+/* year stays to the right with breathing room */
+.project-page .project-year{
+  justify-self: end;
+  text-align: right;
+  min-width: 4ch; /* avoids crowding with the title */
+}
+
+/* the extra MENU/WRITE inside the bar (hidden until stuck) */
+.project-page .meta-menu,
+.project-page .meta-write{
+  display: none;
+  font-family: 'Sora', sans-serif;
+  font-size: 10px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+}
+
+/* when the bar is stuck at top, show them (one row total) */
+.project-page .project-meta.is-stuck .meta-menu,
+.project-page .project-meta.is-stuck .meta-write{ display: block; }
+
+.project-page .meta-menu  { justify-self: start; }
+.project-page .meta-write { justify-self: end; }
+
+/* we draw the divider with ::after now */
+.project-page .project-divider{ display: none !important; }
+
+
+
+/* one sticky row */
+.project-page .project-meta{
+  position: sticky; top: 0; z-index: 500;
+  width: min(82vw, 1200px); margin: 0 auto; padding-block: 6px;
+  display: grid; grid-template-columns: auto 1fr auto auto;
+  align-items: center; column-gap: clamp(16px, 3vw, 48px);
+}
+
+.project-page .project-title{ justify-self: center; text-align: center; }
+.project-page .project-year { justify-self: end;   min-width: 4ch; }
+
+/* hidden until the bar sticks */
+.project-page .meta-menu, .project-page .meta-write{
+  display: none;
+  font-family: 'Sora', sans-serif; font-size: 10px; letter-spacing: .02em;
+  text-transform: uppercase; color:#000; text-decoration:none;
+}
+.project-page .meta-menu  { justify-self: start; }
+.project-page .meta-write { justify-self: end;   }
+
+/* show them when stuck */
+.project-page .project-meta.is-stuck .meta-menu,
+.project-page .project-meta.is-stuck .meta-write{ display:block; }
+
+/* underline that travels with the bar */
+.project-page .project-meta::after{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-8px; width: var(--rule-width);
+  border-top:1px solid rgba(0,0,0,.55);
+}
+.project-page .project-divider{ display:block !important;
+border: 0;
+border-top: 1px solid rgba(0, 0, 0, .55);
+width: var(--rule-width);
+margin: 0 auto clamp(18px, 3vh, 32px);
+}
+
+.project-page .project-meta + .project-divider{
+  display: none !important;
+}
+
+/* 3) (If needed) make sure the carousel bottom line still renders */
+.uno-page .scroll-show .ss-bottomline{
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  top: calc(var(--ss-gap) + var(--ss-thumb) + var(--ss-caption) + var(--ss-caption-gap));
+  border-top: 1px solid rgba(0,0,0,.6);
+  pointer-events: none;
+}
+
+/* 1) Show the real divider immediately under the meta row */
+.project-page .project-meta + .project-divider{
+  display: block !important;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.55);
+  width: var(--rule-width);
+  margin: 6px auto clamp(18px, 3vh, 32px); /* small gap above, adjust if you like */
+}
+
+/* 2) Stop drawing the extra line from the sticky bar itself */
+.project-page .project-meta::after{
+  content: none;  /* prevents a second line */
+}
+
+/* UNO only: remove the top spacing so the first panel starts at the very top */
+.uno-page .project-main{ 
+  margin-top: 0 !important;
+}
+
+/* Safety: ensure the hero itself doesn’t add any extra top gap */
+.uno-page .project-hero{ 
+  margin-top: 0 !important;
+  margin-bottom: clamp(12px, 2.2vh, 28px) !important;
+}
+
+/* Reduce the whitespace below the footer on the UNO page */
+.uno-page .project-main{
+  margin-bottom: clamp(8px, 1.2vh, 16px) !important;  /* or use 0 if you want it flush */
+}
+
+.uno-page .end-grid{ margin-bottom: 2 !important; }
+.uno-page .end-credits{ margin-bottom: 2 !important; }  /* if present */
+
+/* Tighten vertical space for the gallery strip */
+.hero-gallery{
+  margin-block: 12px 16px;      /* <— this crushes the top spacing */
+  padding-block: 0;
+  height: auto !important;
+  min-height: 0 !important;
+  align-content: start;
+  row-gap: 8px;
+}
+
+/* restore gallery spacing so it doesn't crowd the title */
+.hero-gallery{
+  margin: clamp(24px, 6vh, 80px) auto clamp(48px, 12vh, 160px) !important;
+}
+
+.project-page .project-main{ padding-top: 12px; }
+
+/* Landing page: no vertical scroll */
+body.home-page {
+  height: 100vh;            /* lock to viewport height */
+  overflow: hidden;         /* prevent scroll and hide bar */
+  overscroll-behavior: none;
+  -ms-overflow-style: none; /* IE/Edge (legacy) */
+  scrollbar-width: none;    /* Firefox */
+}
+body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+/* Static lines (no background, no animation) */
+.ambient-names{
+  position: fixed;     /* sits over the landing view */
+  inset: 0;
+  pointer-events: none;/* won’t block clicks on tiles */
+  z-index: 120;        /* above tiles; lower/raise as needed */
+}
+
+.names{
+  position: absolute;
+  width: 100%;
+  text-align: center;              /* or left with padding-left: var(--page-gutter) */
+  font-family: 'Sora', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #111;
+  opacity: .75;                    /* subtle; raise to 1 for solid */
+  /* no background, no blur */
+}
+
+.names--top{    top: 30%; transform: rotate(-1deg); }
+.names--bottom{ top: 62%; transform: rotate( 2deg); }
+
+@media (max-width: 640px){
+  .names{ font-size: 10px; letter-spacing: .14em; }
+}
+
+/* Cyan similar to your grid */
+:root{
+  --grid-cyan: rgb(0, 255, 255);
+}
+
+/* Bottom-left bar holding both labels */
+.edge-footer{
+  position: fixed;                     /* sits at the bottom of the page */
+  left: var(--page-gutter);
+  bottom: clamp(8px, 1.6vh, 22px);     /* give it a little breathing room */
+  display: inline-flex;
+  align-items: flex-end;               /* baseline align with bottom edge */
+  gap: clamp(4px, 0.8vw, 12px);
+  pointer-events: none;                /* purely decorative; no blocking */
+  z-index: 40;                         /* above the background, below sticky */
+}
+
+/* Both labels share the same vibe */
+.edge-footer .v-label,
+.edge-footer .h-label{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 300;
+  font-size: clamp(9px, 0.9vw, 11px);  /* smaller than MENU/WRITE */
+  letter-spacing: .08em;
+  color: color-mix(in oklab, var(--grid-cyan) 70%, black);  /* readable cyan */
+  opacity: .9;
+}
+
+/* DESIGN — vertical, down → up */
+.edge-footer .v-label{
+  writing-mode: vertical-rl;           /* top-to-bottom flow */
+  transform: rotate(180deg);           /* flips to read bottom→top (down→up) */
+}
+
+/* TECH — plain horizontal */
+.edge-footer .h-label{
+  writing-mode: horizontal-tb;
+}
+
+/* === Giant split name like JAM / AREA === */
+.name-banner{
+  position: fixed;           /* stays put as you scroll */
+  left: 0;
+  right: 0;
+  bottom: clamp(12px, 5vh, 48px); /* distance from bottom */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-inline: clamp(8px, 2vw, 32px);
+  pointer-events: none;      /* don’t block clicks on content */
+  z-index: 1;                /* keep it behind your thumbnails if they have higher z-index */
+}
+
+/* Make sure your tiles/hero sit above this.
+   If needed, give them something like z-index: 2; */
+
+.name-banner .name-left,
+.name-banner .name-right{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 1000;          /* heavy like in the reference */
+  letter-spacing: -0.05em;
+  line-height: .88;
+  text-transform: uppercase;
+  /* Responsive size: scales from small screens to very large */
+  font-size: clamp(85px, 18vw, 125px);
+
+  color: #111;               /* same black as in sample */
+  opacity: .96;              /* slight soften, optional */
+  /* Optional look tweaks: */
+  /* mix-blend-mode: multiply; */
+  /* text-rendering: geometricPrecision; */
+}
+
+/* === Center block that sits between the two words === */
+.name-banner { position: fixed; }
+.name-center{
+  position: absolute;                 /* dead center horizontally */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(24px, 6vh, 72px);     /* sits slightly above the big words baseline */
+  text-align: center;
+  max-width: min(80ch, 54vw);
+  color: #111;                        /* keep same palette; change if you want cyan */
+  z-index: 2;                         /* above the big words; drop to 1 to sit behind */
+  pointer-events: none;               /* decorative only */
+}
+
+
+.name-center .nc-title{
+  margin: 0 0 .25em;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(9px, 1.4vw, 14px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.name-center .nc-sub{
+  margin: 2;
+  font: 120 clamp(7px, 0.7vw, 9px)/1.1 'Inter', system-ui, sans-serif;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+
+/* Mobile safety: let them scale down and not overflow horizontally */
+@media (max-width: 700px){
+  .name-banner{
+    bottom: clamp(8px, 3vh, 24px);
+  }
+  .name-banner .name-left,
+  .name-banner .name-right{
+    font-size: clamp(72px, 34vw, 180px);
+  }
+
+  .name-center{
+    bottom: clamp(16px, 4.5vh, 40px);
+    max-width: 90vw;
+  }
+  .name-center .nc-title{
+    font-size: clamp(16px, 5.4vw, 28px);
+  }
+}
+
+/* === Small cyan page tags (same look as DESIGN) === */
+:root{
+  /* tweak these to place them exactly where you want */
+  --tag-projects-top: 126px;          /* distance from top edge */
+  --tag-projects-left: 170px;        /* distance from left edge */
+
+  --tag-approach-bottom: 14px;       /* distance from bottom edge */
+  --tag-approach-right: 28px;        /* distance from right edge */
+
+  /* shared styling */
+  --tag-color: color-mix(in oklab, var(--grid-cyan) 70%, black);  /* readable cyan */
+  opacity: .9;           /* same cyan you’re using */
+  --tag-size: clamp(9px, 1.1vw, 12px);           /* same scale as DESIGN */
+  --tag-tracking: .02em;
+}
+
+.page-tags .tag{
+  position: fixed;
+  z-index: 40;                        /* under sticky meta bar but over art */
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 300;
+  font-size: var(--tag-size);
+  letter-spacing: var(--tag-tracking);
+  color: var(--tag-color);
+  line-height: 1;
+  pointer-events: none;               /* purely decorative */
+  user-select: none;
+}
+
+/* upper-left */
+.tag-projects{
+  top: var(--tag-projects-top);
+  left: var(--tag-projects-left);
+}
+
+/* lower-right */
+.tag-approach{
+  right: var(--tag-approach-right);
+  bottom: var(--tag-approach-bottom);
+}
+
+/* optional: soften on phones if they crowd the UI */
+@media (max-width: 700px){
+  .page-tags .tag{ opacity: .7; }
+}
+
+/* Make t1 follow its image's natural aspect */
+.tile--intrinsic{
+  aspect-ratio: auto !important;   /* stop forcing 2:3 */
+  height: auto;                    /* let image decide height */
+  width: min(100%, calc(var(--tile-max) * 1.6));
+}
+
+.tile--intrinsic img{
+  width: 100%;
+  height: auto;                    /* keep image ratio */
+  object-fit: contain;             /* no cropping */
+  display: block;
+}
+
