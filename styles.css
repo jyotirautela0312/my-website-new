@@ -1031,8 +1031,9 @@ body.meta-stuck .project-page .meta-write{ display: inline; }
   position: absolute !important;
   top: 0; left: 0; right: 0;
   z-index: 300;
-  background: transparent;
+  background: #cfc9d5;
 }
+
 
 /* === The ONE sticky bar === */
 .project-page .project-meta{
@@ -1432,3 +1433,170 @@ body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
   display: block;
 }
 
+/* === Project research hero banner (Aura Mist) === */
+
+.project-brief-hero {
+  background: #cfc9d5;
+  padding: 2.3rem min(8vw, 5rem) 2.55rem;
+  color: #111;
+  position: relative;
+  overflow: hidden;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 30vh;            /* tweak 55–65vh to taste */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* title + CTA in one row */
+.project-brief-hero .phb-row{
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  margin-top: 0.75rem;
+}
+
+/* stack on mobile */
+@media (max-width: 768px){
+  .project-brief-hero .phb-row{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+.project-brief-hero .phb-kicker {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+  opacity: 0.8;
+}
+
+.project-brief-hero .phb-gradient {
+  height: 4px;
+  width: 220px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #111, rgba(17, 17, 17, 0));
+  margin-bottom: 2.5rem;
+}
+
+.project-brief-hero .phb-tags {
+  position: absolute;
+  top: 1.75rem;
+  right: min(8vw, 5rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.phb-tag {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.phb-duration {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  color: #c44;
+  text-align: right;
+}
+
+.phb-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+
+.phb-dates {
+  font-weight: 400;
+}
+
+/* long headline across the banner */
+.phb-mainline{
+  max-width: 64rem;                          /* longer line, like ref */
+  font-size: clamp(2.1rem, 3.8vw, 3.4rem);
+  line-height: 1.1;
+  font-weight: 500;
+  margin: 0;
+  color: #f7f4fc;                             /* softer white-ish */
+}
+
+/* emphasised fragments in dark */
+.phb-mainline span{
+  font-weight: 700;
+  color: #151515;
+}
+
+.phb-line{
+  display: inline-block;
+}
+
+/* CTA: red circle + white pill, next to the title */
+.phb-cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 1.8rem;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+.phb-cta-circle{
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #e7615f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.phb-cta-pill{
+  padding: 0.55rem 1.4rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.9);
+  background: transparent;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+
+
+/* mobile tweaks */
+@media (max-width: 768px) {
+  .project-brief-hero {
+    padding: 2.5rem 1.5rem 3rem;
+  }
+
+  .project-brief-hero .phb-tags {
+    position: static;
+    margin-bottom: 1.5rem;
+    justify-content: flex-start;
+  }
+
+  .phb-duration {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .phb-mainline {
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
+  }
+}
