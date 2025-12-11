@@ -184,6 +184,23 @@ body{
   margin: 0 auto;
 }
 
+.project-page .project-hero video{
+  max-height: 58vh;
+  max-width: 170vw;
+  display: block;
+  margin: 0 auto;
+}
+
+.uno-page .project-hero video{
+  max-height: 70vh;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
 /* Meta row directly under the hero (left label, right year) */
 .project-page .project-meta{
   width: min(82vw, 1200px);
@@ -1599,4 +1616,580 @@ body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
   .phb-mainline {
     font-size: clamp(1.6rem, 6vw, 2.1rem);
   }
+}
+
+/* ==== Blue research-question panel (after Objective) ==== */
+
+.uno-page .scope-panel{
+  width: 96vw;
+  margin: 8vh auto;
+  padding: 3rem clamp(2rem, 7vw, 5rem);
+  background: #325bff;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Sora', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* small label + gradient bar on top left */
+.uno-page .scope-kicker{
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+  opacity: 0.85;
+}
+
+.uno-page .scope-gradient{
+  height: 3px;
+  width: 220px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f6f4ff, rgba(246,244,255,0));
+  margin-bottom: 2.4rem;
+}
+
+/* big question text */
+.uno-page .scope-question{
+  max-width: 48rem;
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(1.9rem, 3.3vw, 3rem);
+  line-height: 1.16;
+}
+
+/* CTA on same line area */
+.uno-page .scope-cta{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.8rem;
+}
+
+/* white pill label */
+.uno-page .scope-cta-pill{
+  padding: 0.5rem 1.5rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.9);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* yellow circle with arrow */
+.uno-page .scope-cta-circle{
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: #f7ff5a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+  font-size: 1.2rem;
+}
+
+/* stack nicely on mobile */
+@media (max-width: 768px){
+  .uno-page .scope-panel{
+    margin: 6vh auto;
+    padding: 2.5rem 1.6rem 2.7rem;
+  }
+  .uno-page .scope-question{
+    max-width: 100%;
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+  .uno-page .scope-cta{
+    flex-wrap: wrap;
+  }
+}
+
+/* ==== Mood regulation use-case map (Aura Mist) ==== */
+
+.mf-section{
+  width: 96vw;
+  margin: 8vh auto;
+  padding: 3rem clamp(1.5rem, 4vw, 3rem);
+  background: #050608;
+  color: #f5ffe0;
+  border-radius: 16px;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  position: relative;
+}
+
+/* top pills */
+
+.mf-header{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.mf-pill{
+  border-radius: 999px;
+  border: 1px solid #c7ff5a;
+  padding: 0.55rem 1.5rem 0.65rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mf-pill-main{
+  background: #c7ff5a;
+  color: #111;
+}
+
+.mf-pill-sub{
+  background: transparent;
+  color: #c7ff5a;
+}
+
+/* three-column grid */
+
+.mf-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2.5rem, 4vw, 4rem);
+  position: relative;
+}
+
+/* each column */
+
+.mf-column{
+  position: relative;
+  padding-top: 2.6rem;
+}
+
+/* column heading */
+
+.mf-col-head{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.8rem;
+}
+
+.mf-col-tag{
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid #c7ff5a;
+  color: #050608;
+  background: #c7ff5a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.mf-col-text h3{
+  margin: 0 0 0.25rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mf-col-text p{
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #c9d4a8;
+}
+
+/* side label (vertical text) */
+
+.mf-side-label{
+  position: absolute;
+  left: -1.4rem;
+  top: 50%;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left center;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555f3a;
+}
+
+/* main vertical rail in each column */
+
+.mf-rail{
+  position: absolute;
+  left: 18px;
+  top: 3.3rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: #c7ff5a33;
+}
+
+/* nodes */
+
+.mf-node{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.6rem; /* space from rail */
+}
+
+.mf-node-icon{
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid #c7ff5a;
+  color: #050608;
+  background: #c7ff5a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* horizontal connector from rail to node */
+
+.mf-node-icon::before{
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  width: 14px;
+  height: 1px;
+  background: #c7ff5a66;
+}
+
+/* node text */
+
+.mf-node-body h4{
+  margin: 0 0 0.15rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f5ffe0;
+}
+
+.mf-node-body p{
+  margin: 0;
+  font-size: 0.70srem;
+  line-height: 1.5;
+  color: #d1e0b2;
+}
+
+/* responsive stacking */
+
+@media (max-width: 1024px){
+  .mf-grid{
+    grid-template-columns: 1fr;
+  }
+  .mf-column{
+    padding-top: 2.2rem;
+  }
+  .mf-side-label{
+    position: static;
+    transform: none;
+    margin-bottom: 0.5rem;
+  }
+  .mf-rail{
+    left: 16px;
+  }
+}
+
+@media (max-width: 600px){
+  .mf-section{
+    padding: 2.4rem 1.4rem;
+    width: 100vw;
+    border-radius: 0;
+  }
+  .mf-node{
+    padding-left: 1.2rem;
+  }
+}
+
+/* ==== Aura Mist – Intervention Map ==== */
+
+.uno-page .am-intervention{
+  width: 96vw;
+  margin: 8vh auto;
+  padding: 3rem clamp(1.5rem, 4vw, 3rem);
+  background: #f2f4ff;
+  border: 1px solid #cfd4ff;
+  color: #101428;
+  box-sizing: border-box;
+}
+
+/* heading */
+
+.uno-page .am-int-heading h2{
+  margin: 0 0 0.4rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 600;
+}
+
+.uno-page .am-int-heading h2 span{
+  font-weight: 300;
+}
+
+.uno-page .am-int-heading p{
+  margin: 0 0 2rem;
+  font-size: 0.9rem;
+  max-width: 36rem;
+  line-height: 1.5;
+}
+
+/* top row: side states + venn */
+
+.uno-page .am-int-top{
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 2fr) minmax(0, 1.5fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.uno-page .am-int-side-label{
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6a6f92;
+  margin: 0 0 0.3rem;
+}
+
+.uno-page .am-int-side-text{
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Venn block */
+
+.uno-page .am-int-venn{
+  text-align: center;
+}
+
+.uno-page .am-int-venn-title{
+  margin: 0 0 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #6a6f92;
+}
+
+/* --- Aura Mist Venn diagram (fixed layout) --- */
+
+.uno-page .am-int-venn{
+  text-align: center;
+}
+
+.uno-page .am-int-venn-title{
+  margin: 0 0 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #000000;
+}
+
+/* container for the three circles */
+.uno-page .am-int-venn-circles{
+  position: relative;
+  width: 320px;      /* wider so circles can breathe */
+  height: 180px;
+  margin: 0 auto;
+}
+
+/* base circle style */
+.uno-page .am-int-venn-circle{
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1.5px solid #1f00ff;                 /* Aura Mist blue */
+  background: rgba(31, 0, 255, 0.04);          /* very light fill */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  color: #000000;
+}
+
+/* left / middle / right positions */
+.uno-page .am-int-venn-circle.am-v-left{
+  top: 30px;
+  left: 10px;
+}
+
+.uno-page .am-int-venn-circle.am-v-center{
+  top: 30px;
+  left: 90px;
+}
+
+.uno-page .am-int-venn-circle.am-v-right{
+  top: 30px;
+  left: 170px;
+}
+
+/* centre “Aura Mist” circle */
+.uno-page .am-int-venn-center{
+  position: absolute;
+  top: 66px;           /* visually centred in overlap */
+  left: 116px;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #1f00ff;  /* solid blue */
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* keep it readable on small screens */
+@media (max-width: 480px){
+  .uno-page .am-int-venn-circles{
+    transform: scale(0.85);
+    transform-origin: top center;
+  }
+}
+
+
+
+/* main intervention block */
+
+.uno-page .am-int-main{
+  margin-top: 1.5rem;
+  border-top: 1px solid #cfd4ff;
+  border-bottom: 1px solid #cfd4ff;
+  background: #325bff;
+  color: #f8f8ff;
+  padding: 2.2rem clamp(1.8rem, 3.2vw, 3rem);
+  position: relative;
+}
+
+/* thin line down to pillars */
+
+.uno-page .am-int-main::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -1.5rem;
+  width: 1px;
+  height: 1.5rem;
+  background: #cfd4ff;
+}
+
+/* main heading + sub */
+
+.uno-page .am-int-main-header{
+  max-width: 40rem;
+  margin-bottom: 1.8rem;
+}
+
+.uno-page .am-int-main-title{
+  margin: 0 0 0.5rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.uno-page .am-int-main-sub{
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* three inner blocks */
+
+.uno-page .am-int-main-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.uno-page .am-int-main-block h3{
+  margin: 0 0 0.4rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.uno-page .am-int-main-block p,
+.uno-page .am-int-main-block li{
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.uno-page .am-int-main-block ul{
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+/* bottom pillars */
+
+.uno-page .am-int-pillars{
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.2rem, 2.5vw, 2.4rem);
+}
+
+.uno-page .am-int-pillar{
+  border: 1px solid #cfd4ff;
+  background: #ffffff;
+  padding: 1.2rem 1.2rem 1.4rem;
+  box-sizing: border-box;
+}
+
+.uno-page .am-int-pillar h4{
+  margin: 0 0 0.4rem;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.uno-page .am-int-pillar p{
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* responsiveness */
+
+@media (max-width: 1024px){
+  .uno-page .am-int-top{
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .uno-page .am-int-venn{
+    justify-self: center;
+  }
+  .uno-page .am-int-main-grid,
+  .uno-page .am-int-pillars{
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  .uno-page .am-intervention{
+    width: 100vw;
+    padding-inline: 1.2rem;
+  }
+}
+
+/* UNO page: no coloured header bar */
+.uno-page .header{
+  background: transparent !important;
+  box-shadow: none !important;
 }

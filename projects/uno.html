@@ -81,11 +81,7 @@
     <!-- Your page content; scrolls naturally -->
     <section class="project-body" id="design-brief">
       <p>
-        ELDERS FACE SUBTLE POSTURAL IMBALANCE THAT
-RAISES FALL RISK DURING EVERYDAY STANDING AND WALKING.
-CLINIC TOOLS MISS REAL-LIFE PATTERNS, AND CURRENT WEARABLES
-MEASURE BUT DON’T COACH, LEAVING ACTION GAPS.
-WE NEED A COMFORTABLE SMART INSOLE THAT SENSES, EXPLAINS, AND GUIDES
+        Many young adults struggle to interpret and act on their emotional states, even as mood-tracking tools generate abundant but opaque data. Existing systems rarely translate signals into clear, situated guidance, leaving users unsure how to respond.
       </p>
     </section>
     <div class="project-submeta">
@@ -101,22 +97,348 @@ WE NEED A COMFORTABLE SMART INSOLE THAT SENSES, EXPLAINS, AND GUIDES
   </div>
   <div class="col-right">
     <p>
-    Retro Walk is a closed-loop coaching insole + app for elders: a load-cell grid (100–200 Hz) detects a posture error and instantly launches a 15–30 s micro-tutorial on the phone (animation/voice). While the user follows, the insole compares live pressure/COP to a target pattern to verify correction, then returns a simple pass / try-again score with one-line tips and logs the attempt. The system targets less than 50 ms latency, a 3-step calibration (sit–stand–lean), all-day comfort, and an optional caregiver summary—measure → guide → confirm.
+    This project explores how ideas from affective computing and HCI can help young adults make sense of their moods in everyday activities. I draw on models that map emotions into a smaller set of states (for example, along valence–arousal axes or simple clusters like calm, tense, focused). The aim is to design an activity-focused system that turns these clustered emotional states into clear, practical prompts, gently supporting mood regulation and day-to-day productivity.
   </div>
 </div>
 
-<figure class="project-wide">
-  <img src="../public/Retro Walk img3.png" alt="UNO — full view" loading="lazy">
-</figure>
+<section class="scope-panel">
+  <p class="scope-kicker">
+    Understanding the scope of the brief by opening up the topic
+  </p>
+  <div class="scope-gradient"></div>
 
-<!-- after the first .project-wide -->
-<figure class="project-wide">
-  <img src="../public/Retro Walk img2.png" alt="Describe image 2" loading="lazy">
-</figure>
+  <h2 class="scope-question">
+    How do young adults actually experience their moods in the middle of everyday life? 
+    Can a system move beyond raw mood scores to help them notice, name, and act on what they feel?
+  </h2>
 
-<figure class="project-wide">
-  <img src="../public/img5.png" alt="Describe image 3" loading="lazy">
-</figure>
+  <div class="scope-cta">
+    <span class="scope-cta-pill">Research questions</span>
+    <span class="scope-cta-circle">➜</span>
+  </div>
+</section>
+
+<!-- MOOD REGULATION USE-CASE MAP -->
+<section class="mf-section" id="mood-use-cases">
+  <div class="mf-header">
+    <div class="mf-pill mf-pill-main">
+      FUNCTIONAL USE CASES FOR AUTONOMOUS MOOD REGULATION
+    </div>
+    <div class="mf-pill mf-pill-sub">
+      FROM MOOD SENSING → SELF-REGULATION
+    </div>
+  </div>
+
+  <div class="mf-grid">
+    <!-- Column A -->
+    <article class="mf-column mf-col-a">
+      <header class="mf-col-head">
+        <div class="mf-col-tag">A</div>
+        <div class="mf-col-text">
+          <h3>Triggers &amp; overload</h3>
+          <p>
+            Everyday frictions at home, work and online that slowly build
+            emotional load for young adults.
+          </p>
+        </div>
+      </header>
+
+      <div class="mf-side-label">Sources of affective load</div>
+      <div class="mf-rail" aria-hidden="true"></div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">◎</div>
+        <div class="mf-node-body">
+          <h4>Sensory &amp; workload overload</h4>
+          <p>
+            How might we surface a tiny check-in when deadlines, noise or
+            crowded spaces start to build up, before users reach breaking point?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">☻</div>
+        <div class="mf-node-body">
+          <h4>Social friction &amp; comparison</h4>
+          <p>
+            How might we notice when social media, family expectations or peer
+            conflicts amplify shame or self-doubt, and offer grounding instead
+            of more notifications?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">⚙</div>
+        <div class="mf-node-body">
+          <h4>Hidden emotions under “productivity”</h4>
+          <p>
+            How might we recognise when over-working or constant “busy-ness”
+            is masking anxiety or sadness, and invite a slower, kinder option?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">!</div>
+        <div class="mf-node-body">
+          <h4>Risky coping &amp; withdrawal</h4>
+          <p>
+            How might we detect withdrawal or numbing patterns and suggest
+            safer micro-interventions without judgement or alarm?
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Column B -->
+    <article class="mf-column mf-col-b">
+      <header class="mf-col-head">
+        <div class="mf-col-tag">B</div>
+        <div class="mf-col-text">
+          <h3>In-the-moment regulation</h3>
+          <p>
+            When a trigger hits and emotions peak, Aura Mist offers one clear,
+            doable action instead of heavy options.
+          </p>
+        </div>
+      </header>
+
+      <div class="mf-side-label">Just-in-time support</div>
+      <div class="mf-rail" aria-hidden="true"></div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">●</div>
+        <div class="mf-node-body">
+          <h4>Detecting the episode</h4>
+          <p>
+            How might we combine self-reports, routines and behaviours like
+            hyperactivity or procrastination to sense when an episode is
+            starting?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">➜</div>
+        <div class="mf-node-body">
+          <h4>One clear next step</h4>
+          <p>
+            How might we offer exactly one next step—breathe, walk, write,
+            reach out—so even an overwhelmed user can act?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">☁</div>
+        <div class="mf-node-body">
+          <h4>Multisensory micro-ritual</h4>
+          <p>
+            How might we choreograph a 2–5 minute ritual with scent, a small
+            prompt and a tiny activity so regulation feels embodied, not only
+            “in the head”?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">∆</div>
+        <div class="mf-node-body">
+          <h4>Emotion-family adaptation</h4>
+          <p>
+            How might we adapt the ritual for different clusters such as tense,
+            overloaded or shut-down, instead of treating all “bad mood” the
+            same?
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Column C -->
+    <article class="mf-column mf-col-c">
+      <header class="mf-col-head">
+        <div class="mf-col-tag">C</div>
+        <div class="mf-col-text">
+          <h3>Reflection &amp; long-term change</h3>
+          <p>
+            Turning scattered episodes into patterns, language and small habits
+            so users slowly trust themselves with their moods.
+          </p>
+        </div>
+      </header>
+
+      <div class="mf-side-label">Mood literacy &amp; habits</div>
+      <div class="mf-rail" aria-hidden="true"></div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">✶</div>
+        <div class="mf-node-body">
+          <h4>Simple emotion clusters</h4>
+          <p>
+            How might we cluster raw labels into a few relatable families—
+            calm, tense, overloaded, shut-down—so users can name what they
+            feel?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">☰</div>
+        <div class="mf-node-body">
+          <h4>Pattern views, not just graphs</h4>
+          <p>
+            How might we show mood history as patterns like “exam weeks” or
+            “late-night scrolling” instead of only charts and percentages?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">✓</div>
+        <div class="mf-node-body">
+          <h4>Strategy effectiveness</h4>
+          <p>
+            How might we quietly track which strategies actually help each
+            person and surface them back as gentle suggestions?
+          </p>
+        </div>
+      </div>
+
+      <div class="mf-node">
+        <div class="mf-node-icon">✉</div>
+        <div class="mf-node-body">
+          <h4>Sharing &amp; support</h4>
+          <p>
+            How might we create respectful, consent-based summaries that users
+            can share with a friend or therapist when they need more help?
+          </p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- AURA MIST — INTERVENTION MAP -->
+<section class="am-intervention" id="aura-intervention">
+  <header class="am-int-heading">
+    <h2><span>The</span> intervention</h2>
+    <p>
+      How Aura Mist sits between everyday triggers, existing tools, and the
+      quiet work of mood regulation.
+    </p>
+  </header>
+
+  <!-- TOP ROW: PROBLEM STATES + VENN -->
+  <div class="am-int-top">
+    <div class="am-int-side am-int-side-left">
+      <p class="am-int-side-label">Today</p>
+      <p class="am-int-side-text">
+        Raw mood logs, scattered coping habits, and very little guidance on
+        what to do in the moment.
+      </p>
+    </div>
+
+    <div class="am-int-venn">
+      <p class="am-int-venn-title">My intervention</p>
+      <div class="am-int-venn-circles" aria-hidden="true">
+        <div class="am-int-venn-circle am-v-left">
+          <span>Everyday<br>triggers</span>
+        </div>
+        <div class="am-int-venn-circle am-v-center">
+          <span>Self-reported<br>affect</span>
+        </div>
+        <div class="am-int-venn-circle am-v-right">
+          <span>Existing tools<br>&amp; routines</span>
+        </div>
+        <div class="am-int-venn-center">
+          <span>Aura Mist</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="am-int-side am-int-side-right">
+      <p class="am-int-side-label">With Aura Mist</p>
+      <p class="am-int-side-text">
+        Clustered mood states, one clear nudge, and a tiny ritual that fits
+        quietly into the user’s day.
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN BLOCK: THE INTERVENTION -->
+  <section class="am-int-main">
+    <div class="am-int-main-header">
+      <p class="am-int-main-title">
+        A small ecosystem for autonomous mood regulation.
+      </p>
+      <p class="am-int-main-sub">
+        Aura Mist links mood sensing, multisensory rituals and reflection, so
+        affective signals become gentle, actionable guidance instead of
+        overwhelming data.
+      </p>
+    </div>
+
+    <div class="am-int-main-grid">
+      <div class="am-int-main-block">
+        <h3>Stakeholders</h3>
+        <ul>
+          <li>Young adults juggling study and work</li>
+          <li>Caregivers and close friends</li>
+          <li>Therapists / counsellors (optional hand-off)</li>
+        </ul>
+      </div>
+
+      <div class="am-int-main-block">
+        <h3>Key components</h3>
+        <ul>
+          <li>Lightweight mood &amp; body check-ins</li>
+          <li>Scent diffuser / object for micro-rituals</li>
+          <li>Short, clustered emotion scripts</li>
+          <li>Pattern views for reflection</li>
+        </ul>
+      </div>
+
+      <div class="am-int-main-block">
+        <h3>Key proposition</h3>
+        <p>
+          A gentle system that helps users notice, name and regulate moods
+          without feeling clinical, heavy or judged.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM ROW: THREE PILLARS -->
+  <section class="am-int-pillars">
+    <article class="am-int-pillar">
+      <h4>Pillar 1 · Personal sensing</h4>
+      <p>
+        Small mood and body prompts woven into daily routines, not extra
+        “homework”.
+      </p>
+    </article>
+
+    <article class="am-int-pillar">
+      <h4>Pillar 2 · In-the-moment ritual</h4>
+      <p>
+        2–5 minute multisensory routines triggered when clusters like tense,
+        overloaded or shut-down appear.
+      </p>
+    </article>
+
+    <article class="am-int-pillar">
+      <h4>Pillar 3 · Reflection &amp; sharing</h4>
+      <p>
+        Simple pattern views and optional summaries that can stay private or
+        be shared with a professional.
+      </p>
+    </article>
+  </section>
+</section>
+
+
 
 <!-- PROCESS -->
 <div class="project-submeta">

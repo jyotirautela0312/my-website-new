@@ -33,8 +33,16 @@
   <main class="project-main" aria-label="UNO — BRAND POSTER">
     <!-- HERO IMAGE at the requested size/position -->
     <figure class="project-hero">
-      <img src="../public/123.png" alt="UNO — Brand Poster">
-    </figure>
+  <video
+    class="hero-video"
+    src="../public/12122.mp4"
+    autoplay
+    muted
+    loop
+    playsinline
+  ></video>
+</figure>
+
 
     <!-- Meta row below the image (left label, right year) -->
     <div class="project-meta">
@@ -49,7 +57,7 @@
     <!-- Your page content; scrolls naturally -->
     <section class="project-body">
       <p>
-        UNOPIU, THE LEADING ITALIAN BRAND IN OUR DESIGN FURNITURE, CHOSE US TO STRENGTHEN ITS CUSTOMER DIALOGUE. A TAILORED PROJECT COMBINING CRM STRATEGY, CREATIVITY, AND AUTOMATION TO TURN EVERY CONTACT INTO A VALUABLE BRAND EXPERIANCE.
+        In many Indian homes, women with lower-limb disabilities still do most activities on or near the floor—cooking, bathing, praying, caring for others. Most mobility aids are designed for hospitals and standing postures, so they simply do not reach these ground-level spaces. Families end up managing with painful postures, unsafe improvisations and heavy dependence on caregivers. Low-floor domestic mobility is therefore a real need, but almost invisible in current assistive design.
       </p>
     </section>
     <div class="project-submeta">
@@ -65,9 +73,7 @@
   </div>
   <div class="col-right">
     <p>
-      Unopiù aimed to strengthen relationships with its customers by transforming every interaction
-      into a more engaging and personalized experience. The objective was to build a more effective
-      communication flow that could increase engagement and enhance the value of each contact.
+      This project aims to understand how women actually move, rest and work on the floor at home, and where their bodies struggle the most. I want to document these frictions with simple, situated tools and conversations, then co-create possible futures with women, caregivers and clinicians. The goal is to outline grounded design directions for low-floor mobility aids that fit Indian homes, protect the body and quietly return some everyday independence.
     </p>
   </div>
 </div>
@@ -237,6 +243,13 @@
     const textEl  = banner?.querySelector('.hover-text');
     const header  = document.querySelector('.header');
     const hint    = document.getElementById('cursor-hint');
+
+        // Slow down the hero video playback
+    const heroVideo = document.querySelector('.hero-video');
+    if (heroVideo) {
+      heroVideo.playbackRate = 0.75;  // use 0.5 for half-speed if you prefer
+    }
+
 
     const titleOf = el =>
       (el.dataset?.title || el.getAttribute?.('aria-label') || el?.title ||
