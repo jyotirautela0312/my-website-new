@@ -1314,7 +1314,7 @@ body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-inline: clamp(8px, 2vw, 32px);
+  padding-inline: clamp(20px, 8vw, 160px);
   pointer-events: none;      /* don’t block clicks on content */
   z-index: 1;                /* keep it behind your thumbnails if they have higher z-index */
 }
@@ -2361,4 +2361,8 @@ body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
   margin-top: 10px;
   width: 100%;
   display: block;
+}
+
+.nc-sub {
+  margin-top: 18px;
 }
