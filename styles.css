@@ -2474,4 +2474,142 @@ body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
   }
 }
 
+/* ---------- TABLET (approx. <= 1200px) ---------- */
+@media (max-width: 1200px) {
+
+  /* tiles: make a cleaner grid */
+  .hero-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    column-gap: 3rem;
+    row-gap: 3rem;
+    padding-inline: 3rem;
+  }
+
+  /* ignore any special grid-column positions on smaller screens */
+  .hero-gallery .tile {
+    grid-column: auto !important;
+  }
+
+  /* make JYOTI / RAUTELA a bit smaller so they don’t dominate */
+  .name-banner .name-left,
+  .name-banner .name-right {
+    font-size: clamp(4rem, 7vw, 5.2rem);
+  }
+
+  .name-banner {
+    padding-inline: 3rem;
+  }
+}
+
+/* ===========================
+   PHONE / SMALL SCREEN LAYOUT
+   =========================== */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* ----- 1. BIG NAME: JYOTI / RAUTELA ----- */
+
+  .name-banner {
+    position: static;
+    margin: 2.2rem 0 0;
+    text-align: center;
+  }
+
+  /* Draw BOTH words in one block, one per line */
+  .name-banner::before {
+    content: "JYOTI\A RAUTELA";  /* \A = new line */
+    white-space: pre;
+    display: block;
+    font-size: 2.6rem;
+    line-height: 1.08;
+    letter-spacing: 0.18em;
+  }
+
+  /* Turn off the desktop RAUTELA pseudo-element */
+  .name-banner::after {
+    content: "";
+  }
+
+  /* ----- 2. INTRO TEXT UNDER THE NAME ----- */
+
+  .page-tags {
+    position: static;
+    margin: 0.9rem auto 2rem;
+    max-width: 20rem;
+    text-align: center;
+  }
+
+  /* First line: “She moves between…” */
+  .page-tags::before {
+    content: "She moves between the subtleties of design* and machines with interest in";
+    display: block;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 0.55rem;
+  }
+
+  /* Second line: “MAGICAL REALISM · …” */
+  .page-tags::after {
+    content: "MAGICAL REALISM · CRITICAL FAITH · TECHNOLOGY";
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+  }
+
+  /* ----- 3. PROJECT TILES STACKED WITH TEXT UNDER EACH ----- */
+
+  .hero-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.4rem;
+    padding: 0 1.6rem 3rem;
+    margin-top: 0;        /* sits directly after the intro */
+  }
+
+  .hero-gallery .tile {
+    width: min(82vw, 290px);
+    max-width: 100%;
+    margin: 0;
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-gallery .tile img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Your hover card / description box:
+     make it always visible under the image */
+  .hero-gallery .tile .tile-info {
+    position: static;
+    margin-top: 0.7rem;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    box-shadow: none;
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .hero-gallery .tile:hover .tile-info,
+  .hero-gallery .tile:focus-within .tile-info {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
+
 

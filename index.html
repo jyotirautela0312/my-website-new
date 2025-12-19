@@ -55,56 +55,28 @@
   <section class="hero-gallery" aria-label="Featured projects">
     <a class="tile t1 tile--intrinsic" href="projects/uno.html" rel="noopener"
        data-title="Retro Walk - Posture Coach"
-       data-gallery="Retro"
        data-cursor="Retro Walk - Turns pressure data into tiny, timed micro-tutorials that guide safer balance over time.&#10;Type: Assistive Technology&#10;Role: Researcher & Designer&#10;Year: 2022">
       <img src="public/abcdefg.png" alt="UNO poster" loading="lazy">
     </a>
 
     <a class="tile t5" href="projects/scooter.html"  rel="noopener"
        data-title="Low-Floor Mobility for Women"
-       data-gallery="Thesis"
        data-cursor="Co-designing low-floor mobility for women in Indian homes context&#10;Type: Design Research · Inclusive Mobility&#10;Role: Primary Researcher&#10;Year: 2025 (ongoing)">
       <img src="public/abcd.png" alt="Motion graphic frame" loading="lazy">
     </a>
 
     <a class="tile t6" href="projects/neomind.html" rel="noopener"
        data-title="Zen Tracker - GSR Biofeedback Trainer"
-       data-gallery="zen"
        data-cursor="A small biofeedback tool that helps people train their breath.&#10;Type: Affective computing · Interactive prototype&#10;Role: Researcher & interaction designer&#10;Year: 2023">
       <img src="public/asd.jpeg" alt="Architectural detail" loading="lazy">
     </a>
 
     <a class="tile t7" href="projects/insanehabits.html" rel="noopener"
        data-title="Aura Mist - Autonomous Mood Regulation"
-       data-gallery="aura"
        data-cursor="Explores how subtle biofeedback can help young adults notice, name, and gently redirect their emotional states&#10;Type: UX & Service Design, Speculative Design&#10;Role: Researcher & Critical Designer&#10;Year: 2024">
       <img src="public/abc.png" alt="Poster: Make it Happen" loading="lazy">
     </a>
   </section>
-
-  <div id="projectPreview" class="preview-panel" aria-hidden="true">
-  <div class="preview-inner">
-    <button class="preview-close" type="button" aria-label="Close preview">×</button>
-
-    <div class="preview-image-wrap">
-      <button class="preview-arrow preview-prev" type="button" aria-label="Previous image">‹</button>
-
-      <img class="preview-image" src="" alt="Project preview">
-
-      <button class="preview-arrow preview-next" type="button" aria-label="Next image">›</button>
-    </div>
-
-    <div class="preview-meta">
-      <div class="preview-title">Project title</div>
-      <div class="preview-count">1 / 3</div>
-    </div>
-
-    <a class="preview-link" href="#" aria-label="Open full project">
-      Open full project →
-    </a>
-  </div>
-</div>
-
 
   <!-- Cursor pill -->
   <div id="cursor-hint" class="cursor-hint" aria-hidden="true"></div>
@@ -206,110 +178,6 @@
 
   })();
   </script>
-
-  <script>
-(() => {
-  const panel  = document.getElementById('projectPreview');
-  if (!panel) return;
-
-  const img    = panel.querySelector('.preview-image');
-  const title  = panel.querySelector('.preview-title');
-  const count  = panel.querySelector('.preview-count');
-  const linkEl = panel.querySelector('.preview-link');
-  const btnPrev  = panel.querySelector('.preview-prev');
-  const btnNext  = panel.querySelector('.preview-next');
-  const btnClose = panel.querySelector('.preview-close');
-
-  const galleries = {
-    retro: [
-      'public/retro-1.jpg',
-      'public/retro-2.jpg',
-      'public/retro-3.jpg'
-    ],
-    thesis: [
-      'public/thesis-1.jpg',
-      'public/thesis-2.jpg',
-      'public/thesis-3.jpg'
-    ],
-    zen: [
-      'public/zen-1.jpg',
-      'public/zen-2.jpg'
-    ],
-    aura: [
-      'public/aura-1.jpg',
-      'public/aura-2.jpg',
-      'public/aura-3.jpg'
-    ]
-  };
-
-  let currentKey   = null;
-  let currentIndex = 0;
-  let currentItems = [];
-  let currentHref  = '#';
-
-  function render() {
-    if (!currentItems.length) return;
-    img.src = currentItems[currentIndex];
-    count.textContent = `${currentIndex + 1} / ${currentItems.length}`;
-    linkEl.href = currentHref;
-  }
-
-  function openPreview(key, label, href) {
-    const items = galleries[key];
-    if (!items || !items.length) return;
-
-    currentKey   = key;
-    currentItems = items;
-    currentIndex = 0;
-    currentHref  = href || '#';
-
-    title.textContent = label || 'Project';
-    render();
-    panel.classList.add('is-open');
-    panel.setAttribute('aria-hidden', 'false');
-  }
-
-  function closePreview() {
-    panel.classList.remove('is-open');
-    panel.setAttribute('aria-hidden', 'true');
-  }
-
-  btnPrev.addEventListener('click', () => {
-    if (!currentItems.length) return;
-    currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
-    render();
-  });
-
-  btnNext.addEventListener('click', () => {
-    if (!currentItems.length) return;
-    currentIndex = (currentIndex + 1) % currentItems.length;
-    render();
-  });
-
-  btnClose.addEventListener('click', closePreview);
-
-  panel.addEventListener('click', (e) => {
-    if (e.target === panel) closePreview();
-  });
-
-  // Attach to tiles
-  document.querySelectorAll('.hero-gallery .tile').forEach(tile => {
-    tile.addEventListener('click', (e) => {
-      const key = tile.dataset.gallery;
-      const label =
-        tile.dataset.title ||
-        tile.getAttribute('aria-label') ||
-        tile.querySelector('img')?.alt ||
-        'Project';
-
-      if (key && galleries[key]) {
-        e.preventDefault(); // open preview instead of direct nav
-        openPreview(key, label, tile.href);
-      }
-    });
-  });
-})();
-</script>
 
 <script>
 (function() {
