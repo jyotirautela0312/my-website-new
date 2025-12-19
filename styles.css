@@ -1048,7 +1048,7 @@ body.meta-stuck .project-page .meta-write{ display: inline; }
   position: absolute !important;
   top: 0; left: 0; right: 0;
   z-index: 300;
-  background: #cfc9d5;
+  background: #fcfdf8;
 }
 
 
@@ -2192,4 +2192,173 @@ body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 .uno-page .header{
   background: transparent !important;
   box-shadow: none !important;
+}
+
+/* =========================================================
+   NEOMIND PAGE OVERRIDES (layout, type, tiles, media)
+   ========================================================= */
+
+.neomind-page .project-main{
+  padding-top: 16px;
+  margin: clamp(24px, 5vh, 64px) auto clamp(56px, 10vh, 120px);
+}
+
+/* Body text: smaller, calmer, narrower column */
+.neomind-page .project-body{
+  width: min(72vw, 720px);
+  margin: 0 auto clamp(24px, 4vh, 40px);
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #111;
+}
+
+.neomind-page .project-body h2{
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.neomind-page .project-body p,
+.neomind-page .project-body ul,
+.neomind-page .project-body ol{
+  margin: 0 0 12px;
+}
+
+.neomind-page .project-body ul,
+.neomind-page .project-body ol{
+  padding-left: 1.2rem;
+}
+
+.neomind-page .project-body li{
+  margin-bottom: 4px;
+}
+
+/* Figures: consistent width + captions */
+.neomind-page .project-wide{
+  width: min(82vw, 960px);
+  margin: 0 auto clamp(24px, 5vh, 56px);
+}
+
+.neomind-page .project-wide img,
+.neomind-page .project-wide video{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.neomind-page .project-wide figcaption{
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #555;
+}
+
+/* Objective / process blocks: keep same structure but align with narrower column */
+.neomind-page .project-submeta,
+.neomind-page .project-detail{
+  width: min(82vw, 960px);
+  margin: 0 auto clamp(16px, 3vh, 32px);
+}
+
+.neomind-page .project-detail .col-left{
+  font-size: 12px;
+}
+
+.neomind-page .project-detail .col-right{
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* =============================
+   2-column layout for text + media
+   ============================= */
+
+.neomind-page .nm-two-col{
+  width: min(82vw, 960px);
+  margin: 0 auto clamp(32px, 5vh, 56px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 32px);
+  align-items: flex-start;
+}
+
+.neomind-page .nm-two-col--reverse{
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+}
+
+.neomind-page .nm-two-col .nm-text{
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.neomind-page .nm-two-col .nm-media video,
+.neomind-page .nm-two-col .nm-media img{
+  width: 100%;
+  display: block;
+}
+
+/* Stack on mobile */
+@media (max-width: 900px){
+  .neomind-page .nm-two-col,
+  .neomind-page .nm-two-col--reverse{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================
+   Tile rows: for small video / text cards
+   ============================= */
+
+.neomind-page .nm-tile-row{
+  width: min(82vw, 960px);
+  margin: 0 auto clamp(24px, 5vh, 48px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+}
+
+.neomind-page .nm-tile{
+  padding: 14px 16px 16px;
+  border: 1px solid rgba(0,0,0,.12);
+  background: #f9f7f3; /* off-white from your palette */
+}
+
+/* Palette variations */
+.neomind-page .nm-tile--blue{
+  background: #1f00ff;
+  color: #fff;
+}
+
+.neomind-page .nm-tile--pink{
+  background: #ff94a1;
+  color: #000;
+}
+
+.neomind-page .nm-tile--orange{
+  background: #ff4e17;
+  color: #000;
+}
+
+.neomind-page .nm-tile h3{
+  margin: 0 0 8px;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.neomind-page .nm-tile p{
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.neomind-page .nm-tile video,
+.neomind-page .nm-tile img{
+  margin-top: 10px;
+  width: 100%;
+  display: block;
 }
