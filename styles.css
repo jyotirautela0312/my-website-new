@@ -2611,5 +2611,154 @@ body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
   }
 }
 
+/* =======================
+   Retro Walk page layout
+   ======================= */
+
+.retrowalk-page {
+  background-color: #f9f7f3;  /* your palette */
+}
+
+/* Hero keeps your existing ratio */
+.rw-hero img {
+  width: 100%;
+  display: block;
+}
+
+/* Short intro paragraph */
+.rw-intro {
+  max-width: 46rem;
+  margin: 0 auto 2.5rem;
+}
+
+/* Generic 2-column grid used in many sections */
+.rw-grid2 {
+  max-width: 60rem;
+  margin: 0 auto 3rem;
+  display: grid;
+  grid-template-columns: minmax(11rem, 18rem) minmax(0, 1fr);
+  gap: 1.5rem 3rem;
+  align-items: flex-start;
+}
+
+.rw-col-label {
+  font-size: 0.82rem;
+}
+
+.rw-col-copy {
+  font-size: 0.95rem;
+}
+
+.rw-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.4rem;
+  color: #666;
+}
+
+.rw-small {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+}
+
+/* Section titles */
+.rw-section-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.75rem;
+}
+
+/* Image gallery rows */
+.rw-gallery-section {
+  max-width: 72rem;
+  margin: 0 auto 3rem;
+}
+
+.rw-gallery-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.rw-gallery-row--tight {
+  gap: 1rem;
+}
+
+.rw-gallery-row figure {
+  margin: 0;
+  background: #ffffff;
+  padding: 0.75rem;
+}
+
+.rw-gallery-row img {
+  width: 100%;
+  display: block;
+}
+
+.rw-gallery-row figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #444;
+}
+
+/* Infographic block */
+.rw-infographic .rw-info-figure {
+  margin: 0;
+  background: #ffffff;
+  padding: 0.75rem;
+}
+
+.rw-infographic img {
+  width: 100%;
+  display: block;
+}
+
+/* Insights list */
+.rw-small-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rw-small-list li {
+  margin-bottom: 0.4rem;
+}
+
+.rw-bullets {
+  padding-left: 1rem;
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+}
+
+/* Outcome */
+.rw-outcome {
+  max-width: 46rem;
+  margin: 0 auto 4rem;
+}
+
+/* --------- Responsive tweaks --------- */
+@media (max-width: 900px) {
+  .rw-grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .rw-gallery-row { 
+    grid-template-columns: 1fr;
+  }
+
+  .rw-gallery-section,
+  .rw-grid2,
+  .rw-intro,
+  .rw-outcome {
+    padding-inline: 1.5rem;
+  }
+}
+
 
 
