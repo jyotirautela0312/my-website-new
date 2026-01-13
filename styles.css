@@ -2759,6 +2759,353 @@ body.home-page::-webkit-scrollbar { display: none; } /* Chrome/Safari */
     padding-inline: 1.5rem;
   }
 }
+/* ===========================
+   RETRO WALK TYPOGRAPHY
+   =========================== */
+
+body.retrowalk-page {
+  /* same overall feel as other project pages */
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* small labels, section titles, meta title */
+.retrowalk-page .project-title,
+.retrowalk-page .rw-section-title,
+.retrowalk-page .rw-label {
+  font-family: "Sora", system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+/* main paragraphs + small context text */
+.retrowalk-page .project-body p,
+.retrowalk-page .rw-small,
+.retrowalk-page figcaption,
+.retrowalk-page .rw-bullets li,
+.retrowalk-page .rw-small-list li {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* optional: make figcaptions a bit softer */
+.retrowalk-page figcaption {
+  opacity: 0.8;
+}
+
+/* Low-floor mobility layout */
+
+.lfm-grid2 {
+  max-width: 1100px;
+  margin: 3.5rem auto 0;
+  padding: 0 3vw;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+  gap: 2.5rem;
+}
+
+.lfm-col {
+  min-width: 0;
+}
+
+.lfm-kicker {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.lfm-small {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+}
+
+.lfm-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.8rem;
+}
+
+.lfm-bullets li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+}
+
+.lfm-bullets li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Stack neatly on phones/tablets */
+@media (max-width: 760px) {
+  .lfm-grid2 {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    margin-top: 2.5rem;
+  }
+}
+
+/* === Low-floor mobility: literature band === */
+
+.lfm-litband {
+  margin-top: 3.5rem;
+  background: #1f00ff;              /* Aura Mist blue */
+  color: #f9f7f3;                    /* off-white text */
+}
+
+.lfm-lit-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 3vw 3.2rem;
+}
+
+.lfm-lit-head h2 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin: 0.6rem 0 0;
+  max-width: 30rem;
+}
+
+.lfm-lit-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.8rem;
+  margin-top: 2.2rem;
+}
+
+.lfm-lit-row figure {
+  margin: 0;
+}
+
+.lfm-lit-row img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;        /* just in case image loads slowly */
+}
+
+.lfm-lit-row figcaption {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-top: 0.6rem;
+  color: rgba(249, 247, 243, 0.85);
+}
+
+/* Give the middle tile a bit more presence on wide screens */
+.lfm-lit-center {
+  transform: translateY(-0.3rem);
+}
+
+/* Gaps list */
+.lfm-lit-gaps {
+  margin-top: 2.4rem;
+}
+
+.lfm-bullets--light li {
+  color: rgba(249, 247, 243, 0.95);
+}
+
+/* responsive stacking for tablets / phones */
+@media (max-width: 900px) {
+  .lfm-lit-row {
+    grid-template-columns: 1fr;
+  }
+  .lfm-lit-center {
+    transform: none;
+  }
+  .lfm-lit-head h2 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .lfm-lit-inner {
+    padding: 2.4rem 1.6rem 2.6rem;
+  }
+}
+
+/* === Low-floor mobility: fieldwork photo story === */
+
+.lfm-field {
+  margin-top: 3.5rem;
+}
+
+.lfm-field-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3vw 3.5rem;
+}
+
+.lfm-section-head {
+  max-width: 40rem;
+}
+
+.lfm-section-head h2 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.lfm-lead {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  max-width: 34rem;
+  margin: 0;
+}
+
+/* photo grid */
+.lfm-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem;
+  margin-top: 2.4rem;
+}
+
+.lfm-photo-grid figure {
+  margin: 0;
+}
+
+.lfm-photo-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #f0f0f0;
+}
+
+.lfm-photo-grid figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* consent note */
+.lfm-consent-note {
+  margin-top: 2.2rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #666;
+}
+
+/* responsive: stack images on smaller screens */
+@media (max-width: 900px) {
+  .lfm-field-inner {
+    padding: 0 1.6rem 3rem;
+  }
+
+  .lfm-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .lfm-photo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lfm-section-head h2 {
+    font-size: 1.25rem;
+  }
+
+  .lfm-lead {
+    font-size: 0.94rem;
+  }
+}
+
+/* === Low-floor mobility: posture & floor maps === */
+
+.lfm-maps {
+  margin-top: 3.5rem;
+}
+
+.lfm-maps-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3vw 3.5rem;
+}
+
+/* reuse lfm-section-head, lfm-kicker, lfm-lead from earlier section */
+
+.lfm-maps-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 2rem;
+  margin-top: 2.4rem;
+}
+
+.lfm-map-main,
+.lfm-map-side figure {
+  margin: 0;
+}
+
+.lfm-map-main img,
+.lfm-map-side img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #f0f0f0; /* soft placeholder if images load slowly */
+}
+
+.lfm-map-main figcaption,
+.lfm-map-side figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* stack the two side figures */
+.lfm-map-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* responsive behaviour */
+@media (max-width: 900px) {
+  .lfm-maps-inner {
+    padding: 0 1.6rem 3rem;
+  }
+
+  .lfm-maps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lfm-map-side {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .lfm-map-side figure {
+    flex: 1 1 240px;
+  }
+}
+
+@media (max-width: 600px) {
+  .lfm-maps-grid {
+    gap: 1.4rem;
+  }
+
+  .lfm-map-side {
+    flex-direction: column;
+  }
+
+  .lfm-section-head h2 {
+    font-size: 1.25rem;
+  }
+}
 
 
 
