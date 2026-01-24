@@ -1,6 +1,81 @@
 /* ---------- Base & grid background ---------- */
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body{
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.75;
+  color: #111;
+}
+
+h1{
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(20px, 3vw, 48px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1, h2, h3, .menu-text, .write-text, .lfm-kicker, .project-meta{
+  font-family: 'Sora', sans-serif;
+}
+
+.content{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.lf-hero-caption {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  left: auto;
+  top: auto;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.75);
+  background: rgba(0,0,0,0.35);
+  padding: 6px 8px;
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.lf-hero {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+}
+
+.lf-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.35),
+    rgba(0,0,0,0.15)
+  );
+  pointer-events: none;
+}
+
+.hero-video{
+  width: 100%;
+  height: 70vh;          /* keep your chosen height */
+  object-fit: cover;
+  object-position: 50% 65%;  /* pushes the visible area DOWN */
+  display: block;
+
+  filter: grayscale(100%) contrast(1.05) brightness(0.95);
+}
 
 :root{
   --grid: clamp(12px, 2.2vw, 24px);
@@ -515,11 +590,6 @@ body{
   .uno-page .result-box .rb-viewport{ height: 42vh; }
 }
 
-/* Right column becomes a mini layout: viewport on top, footer at bottom */
-.uno-page .result-box .rb-right{
-  display: grid;
-  grid-template-rows: auto auto;
-}
 
 /* Footer lives inside .rb-right only */
 .uno-page .result-box .rb-right .rb-footer{
@@ -983,249 +1053,7 @@ body{
 
 
 
-/* The meta row is THE sticky bar */
-.project-page .project-meta{
-  position: sticky;
-  top: 0;
-  z-index: 500;
 
-  /* your existing centered width */
-  width: min(82vw, 1200px);
-  margin: 0 auto;
-  padding-block: 6px;
-
-  /* single-line layout: MENU | title | 2024 | WRITE */
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  align-items: center;
-  column-gap: 10px;
-
-  /* full-bleed white background without overflow problems */
-  background: #fcfdf8;                       /* bar color */
-  box-shadow: 0 0 0 100vmax #fcfdf8;         /* extend bg to viewport edges */
-  clip-path: inset(0 -100vmax);              /* allow the bleed to render */
-}
-
-/* underline stays with the bar */
-.project-page .project-meta::after{
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -8px;
-  width: var(--rule-width);
-  border-top: 1px solid rgba(0,0,0,.55);
-}
-
-/* title centered */
-.project-page .project-title{ 
-  text-align: center; 
-  justify-self: center; 
-}
-
-/* MENU/WRITE inside the bar — hidden until the bar reaches top */
-.project-page .meta-menu,
-.project-page .meta-write{
-  font-family: 'Sora', sans-serif;
-  font-size: 10px;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  color: #000;
-  text-decoration: none;
-  display: none;                              /* default hidden */
-}
-.project-page .meta-menu  { justify-self: start; }
-.project-page .meta-write { justify-self: end; }
-
-/* When stuck at the very top, show MENU/WRITE (one row total) */
-body.meta-stuck .project-page .meta-menu,
-body.meta-stuck .project-page .meta-write{ display: inline; }
-
-/* We draw the rule with ::after now */
-.project-page .project-divider{ display: none !important; }
-
-.project-page .header{
-  position: absolute !important;
-  top: 0; left: 0; right: 0;
-  z-index: 300;
-  background: #fcfdf8;
-}
-
-
-/* === The ONE sticky bar === */
-.project-page .project-meta{
-  position: sticky;
-  top: 0;
-  z-index: 500;
-
-  /* your centered content width */
-  width: min(82vw, 1200px);
-  margin: 0 auto;
-  padding-block: 6px;
-
-  /* single-row layout: MENU | title | year | WRITE */
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  align-items: center;
-  column-gap: clamp(16px, 3vw, 48px);
-
-  /* full-bleed white background (no viewport gaps, no scrollbar math) */
-  background: #fcfdf8;
-  box-shadow: 0 0 0 100vmax #fcfdf8;  /* bleed to edges */
-  clip-path: inset(0 -100vmax);
-
-  /* keep your fonts/size from earlier rules */
-}
-
-/* underline that travels with the bar */
-.project-page .project-meta::after{
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -8px;
-  width: var(--rule-width);
-  border-top: 1px solid rgba(0,0,0,.55);
-}
-
-/* title centered perfectly */
-.project-page .project-title{
-  justify-self: center;
-  text-align: center;
-}
-
-/* year stays to the right with breathing room */
-.project-page .project-year{
-  justify-self: end;
-  text-align: right;
-  min-width: 4ch; /* avoids crowding with the title */
-}
-
-/* the extra MENU/WRITE inside the bar (hidden until stuck) */
-.project-page .meta-menu,
-.project-page .meta-write{
-  display: none;
-  font-family: 'Sora', sans-serif;
-  font-size: 10px;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  color: #000;
-  text-decoration: none;
-}
-
-/* when the bar is stuck at top, show them (one row total) */
-.project-page .project-meta.is-stuck .meta-menu,
-.project-page .project-meta.is-stuck .meta-write{ display: block; }
-
-.project-page .meta-menu  { justify-self: start; }
-.project-page .meta-write { justify-self: end; }
-
-/* we draw the divider with ::after now */
-.project-page .project-divider{ display: none !important; }
-
-
-
-/* one sticky row */
-.project-page .project-meta{
-  position: sticky; top: 0; z-index: 500;
-  width: min(82vw, 1200px); margin: 0 auto; padding-block: 6px;
-  display: grid; grid-template-columns: auto 1fr auto auto;
-  align-items: center; column-gap: clamp(16px, 3vw, 48px);
-}
-
-.project-page .project-title{ justify-self: center; text-align: center; }
-.project-page .project-year { justify-self: end;   min-width: 4ch; }
-
-/* hidden until the bar sticks */
-.project-page .meta-menu, .project-page .meta-write{
-  display: none;
-  font-family: 'Sora', sans-serif; font-size: 10px; letter-spacing: .02em;
-  text-transform: uppercase; color:#000; text-decoration:none;
-}
-.project-page .meta-menu  { justify-self: start; }
-.project-page .meta-write { justify-self: end;   }
-
-/* show them when stuck */
-.project-page .project-meta.is-stuck .meta-menu,
-.project-page .project-meta.is-stuck .meta-write{ display:block; }
-
-/* underline that travels with the bar */
-.project-page .project-meta::after{
-  content:""; position:absolute; left:50%; transform:translateX(-50%);
-  bottom:-8px; width: var(--rule-width);
-  border-top:1px solid rgba(0,0,0,.55);
-}
-.project-page .project-divider{ display:block !important;
-border: 0;
-border-top: 1px solid rgba(0, 0, 0, .55);
-width: var(--rule-width);
-margin: 0 auto clamp(18px, 3vh, 32px);
-}
-
-.project-page .project-meta + .project-divider{
-  display: none !important;
-}
-
-/* 3) (If needed) make sure the carousel bottom line still renders */
-.uno-page .scroll-show .ss-bottomline{
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 0;
-  top: calc(var(--ss-gap) + var(--ss-thumb) + var(--ss-caption) + var(--ss-caption-gap));
-  border-top: 1px solid rgba(0,0,0,.6);
-  pointer-events: none;
-}
-
-/* 1) Show the real divider immediately under the meta row */
-.project-page .project-meta + .project-divider{
-  display: block !important;
-  border: 0;
-  border-top: 1px solid rgba(0,0,0,.55);
-  width: var(--rule-width);
-  margin: 6px auto clamp(18px, 3vh, 32px); /* small gap above, adjust if you like */
-}
-
-/* 2) Stop drawing the extra line from the sticky bar itself */
-.project-page .project-meta::after{
-  content: none;  /* prevents a second line */
-}
-
-/* UNO only: remove the top spacing so the first panel starts at the very top */
-.uno-page .project-main{ 
-  margin-top: 0 !important;
-}
-
-/* Safety: ensure the hero itself doesn’t add any extra top gap */
-.uno-page .project-hero{ 
-  margin-top: 0 !important;
-  margin-bottom: clamp(12px, 2.2vh, 28px) !important;
-}
-
-/* Reduce the whitespace below the footer on the UNO page */
-.uno-page .project-main{
-  margin-bottom: clamp(8px, 1.2vh, 16px) !important;  /* or use 0 if you want it flush */
-}
-
-.uno-page .end-grid{ margin-bottom: 2 !important; }
-.uno-page .end-credits{ margin-bottom: 2 !important; }  /* if present */
-
-/* Tighten vertical space for the gallery strip */
-.hero-gallery{
-  margin-block: 12px 16px;      /* <— this crushes the top spacing */
-  padding-block: 0;
-  height: auto !important;
-  min-height: 0 !important;
-  align-content: start;
-  row-gap: 8px;
-}
-
-/* restore gallery spacing so it doesn't crowd the title */
-.hero-gallery{
-  margin: clamp(24px, 6vh, 80px) auto clamp(48px, 12vh, 160px) !important;
-}
-
-.project-page .project-main{ padding-top: 12px; }
 
 /* Landing page: no vertical scroll */
 body.home-page {
@@ -3107,5 +2935,207 @@ body.retrowalk-page {
   }
 }
 
+/* LFM intro: break out + align to video edge */
+.project-page .project-body.lf-intro{
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: 0;          /* override the auto-centering */
+  padding: 0;               /* optional: avoid inherited padding */
+}
+
+.project-page .project-body.lf-intro .lf-intro-inner{
+  padding-left: 8vw;        /* match your hero */
+  padding-right: 8vw;
+  max-width: 880px;
+  margin: 0;                /* NO auto center */
+  text-align: left;         /* safety */
+}
+
+/* Make the intro block share the SAME column as the video */
+.project-page .project-body.lf-intro{
+  width: min(82vw, 1200px) !important;  /* same as your .project-hero */
+  margin: 0 auto !important;            /* centers it exactly like the video */
+  padding: 0 !important;
+}
+
+/* Make heading + body extend to ~3/4 of the video width (yellow line) */
+.project-page .project-body.lf-intro .lf-intro-inner{
+  width: 75% !important;                /* ends around yellow line */
+  max-width: none !important;
+  margin: 0 !important;                 /* starts at the LEFT edge (blue line) */
+  padding: 0 !important;
+  text-align: left !important;
+}
+
+/* === ALIGN META ROW WITH HERO VIDEO === */
+
+/* Make meta bar use same width as video */
+.project-page .project-meta{
+  width: min(82vw, 1200px);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Push the year to the far right edge of the video */
+.project-page .project-year{
+  margin-left: auto;
+}
+
+/* =========================
+   Research Questions Poster
+   (matches the reference layout)
+   ========================= */
 
 
+.rq-wrap{
+  /* SAME width & alignment as your hero/meta video block */
+  width: min(82vw, 1200px);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1fr; /* left text column + middle + right */
+  grid-template-rows: auto auto 1fr auto;
+  gap: 22px 22px;
+
+  grid-template-areas:
+    "title  title  title"
+    "tag    .      ."
+    "left   midTop right"
+    "bl1    bl2    right";
+}
+
+/* Heading + small tag */
+.rq-title{
+  grid-area: title;
+  margin: 0;
+  font-family: 'Sora', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: clamp(24px, 3vw, 48px);
+  line-height: 0.95;
+}
+
+.rq-tag{
+  grid-area: tag;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #1f00ff;
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.rq-lefttext{
+  grid-area: left;
+  margin: 0;
+  max-width: 34ch;
+  font: 500 14px/1.6 'Inter', system-ui, sans-serif;
+  color: #1f00ff;
+}
+
+/* ==============================
+   RQ POSTER — FIXED TILE SIZES + POSITIONS (REFERENCE LOOK)
+   Paste at VERY END of CSS
+   ============================== */
+
+/* Make this section a poster canvas */
+.rq-poster { padding: 0; }
+.rq-wrap{
+  position: relative;
+  margin: 0 auto;
+  height: 86vh;             /* poster area height */
+}
+
+/* --- TILE SIZE (same for all tiles) --- */
+.rq-card{
+  position: absolute;
+  width: 220px;             /* tile width (match ref) */
+  height: 260px;            /* tile height (match ref) */
+  border-radius: 18px;
+  padding:42px 18px 20px;
+  box-shadow: none;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* Push the main question text lower inside the card (like the reference) */
+.rq-card .rq-card-text{
+  margin-top: 55px;
+}
+
+/* colors */
+.rq-card--blue{ background:#1f00ff; color:#fff; }
+.rq-card--gray{ background:#e9e9ea; color:#111; }
+
+
+
+.rq-card-text{
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 400;
+  max-width: 22ch;     /* wrap like the reference */
+}
+
+/* --- POSITIONS (match the reference poster) ---
+   Adjust only these 5 lines if you want micro nudges.
+*/
+.rq-card--gray{ left: 34vw; top: 09vh }  /* RQ1 center-top */
+.rq-card--centerTop{    left: 50vw;top:09vh} /* RQ2 right-center */
+.rq-card--bottomLeft{   left: 18vw; top: 48vh; }  /* RQ3 bottom-left */
+.rq-card--bottomLeft2{  left: 34vw; top: 48vh; }  /* RQ4 bottom-mid */
+
+/* outlined text box on the right */
+.rq-outline{
+  position: absolute;
+  left: 82vw;
+  top: 36vh;
+  width: 240px;
+  height: 520px;
+  border: 2px solid #1f00ff;
+  border-radius: 18px;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* Push RQ label down inside the card */
+.rq-card{
+  justify-content: flex-start;
+}
+
+
+/* Ensure body text stays tight under RQ label */
+.rq-card-text{
+  margin-top: 0;
+}
+
+/* RQ label position (lower, right above text) */
+.rq-card{
+  padding: 22px 18px 20px;  /* top right bottom */
+  gap: 8px;
+}
+
+.rq-card .rq-kicker{
+  margin: 118px 0 6px;      /* push label down */
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.rq-card .rq-card-text{
+  margin: 0;
+}
+
+.rq-poster{
+  width: min(82vw, 1200px);
+  margin: 0 auto;
+  padding-top: 0;
+}
