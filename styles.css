@@ -3088,23 +3088,42 @@ body.retrowalk-page {
 /* --- POSITIONS (match the reference poster) ---
    Adjust only these 5 lines if you want micro nudges.
 */
-.rq-card--gray{ left: 34vw; top: 09vh }  /* RQ1 center-top */
-.rq-card--centerTop{    left: 50vw;top:09vh} /* RQ2 right-center */
-.rq-card--bottomLeft{   left: 18vw; top: 48vh; }  /* RQ3 bottom-left */
-.rq-card--bottomLeft2{  left: 34vw; top: 48vh; }  /* RQ4 bottom-mid */
+.rq-card--gray{ left: 30vw; top: 09vh }  /* RQ1 center-top */
+.rq-card--centerTop{    left:45.3vw;top:9vh} /* RQ2 right-center */
+.rq-card--bottomLeft{   left:15.5vw;top: 47vh; }  /* RQ3 bottom-left */
+.rq-card--bottomLeft2{  left:00.25vw;top:47vh; }  /* RQ4 bottom-mid */
 
 /* outlined text box on the right */
 .rq-outline{
   position: absolute;
-  left: 82vw;
-  top: 36vh;
-  width: 240px;
-  height: 520px;
+  top:340px;
+  right:  -2px;
+  width: 506px;
+  height: 260px;
   border: 2px solid #1f00ff;
-  border-radius: 18px;
-  padding: 18px;
+  border-radius: 12px;
+  padding: 14px;
   box-sizing: border-box;
 }
+
+.rq-outline-text {
+  margin-top:100px;
+  font-size: 12px;
+}
+
+.rq-outline-text strong {
+  font-weight: 600;
+}
+
+.rq-outline-bold {
+  display: block;
+  margin: 0 0 6px 0;
+}
+
+.rq-outline-normal {
+  margin: 0;
+}
+
 
 /* Push RQ label down inside the card */
 .rq-card{
