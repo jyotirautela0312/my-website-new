@@ -3032,26 +3032,34 @@ body.retrowalk-page {
   text-transform: uppercase;
 }
 
-.rq-lefttext{
-  grid-area: left;
-  margin: 0;
-  max-width: 34ch;
-  font: 500 14px/1.6 'Inter', system-ui, sans-serif;
-  color: #1f00ff;
-}
 
-/* ==============================
-   RQ POSTER — FIXED TILE SIZES + POSITIONS (REFERENCE LOOK)
-   Paste at VERY END of CSS
-   ============================== */
 
 /* Make this section a poster canvas */
 .rq-poster { padding: 0; }
 .rq-wrap{
+  display: grid;
   position: relative;
   margin: 0 auto;
   height: 86vh;             /* poster area height */
 }
+
+.rq-lefttext{
+  max-width: 920px;
+  margin-top: 24px;
+  font-size: 14px;
+  position: absolute;
+  left: 60px;
+  top: 120px;
+  width: 920px;
+  font-size: 12px;
+}
+
+.hashtag{
+  font-weight: 600;
+}
+
+
+
 
 /* --- TILE SIZE (same for all tiles) --- */
 .rq-card{
