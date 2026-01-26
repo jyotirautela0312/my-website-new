@@ -1,3 +1,22 @@
+:root {
+  --font-title: Helvetica, Arial, sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6,
+.project-title,
+.lfm-method-title,
+.mit-ending-title,
+.rq-kicker,
+.rq-tag {
+  font-family: var(--font-title);
+}
+
+
 /* ---------- Base & grid background ---------- */
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
@@ -3433,4 +3452,121 @@ body.retrowalk-page {
   .lfm-themes-grid{
     grid-template-columns: 1fr;
   }
+}
+
+/* === Bridge to Phases 3–4 === */
+
+.lfm-bridge{
+  margin-top: 3.5rem;
+}
+
+.lfm-bridge-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3vw 3.5rem;
+}
+
+.lfm-bridge-head{
+  max-width: 44rem;
+}
+
+.lfm-bridge-head h2{
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin: 0.25rem 0 0;
+}
+
+.lfm-bridge-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.lfm-bridge-lead{
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  max-width: 34rem;
+}
+
+.lfm-bridge-list{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lfm-bridge-list li{
+  margin-bottom: 1.1rem;
+  padding-left: 1.2rem;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.lfm-bridge-list li::before{
+  content: "–";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.lfm-bridge-list strong{
+  font-weight: 700;
+}
+
+@media (max-width: 900px){
+  .lfm-bridge-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === METHOD ENDING PANEL (MIT-style) === */
+
+.lfm-method-outlook {
+  width: 100%;
+  padding: clamp(4rem, 8vw, 8rem) 0;
+}
+
+.lfm-method-outlook-inner {
+  max-width: 1100px;
+  margin-left: clamp(2rem, 8vw, 12rem);
+  margin-right: auto;
+}
+
+.lfm-method-outlook-text {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.25;
+  font-weight: 400;
+  color: #111;
+  margin-bottom: 2rem;
+}
+
+.lfm-method-outlook-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1f00ff;
+  text-decoration: none;
+}
+
+.lfm-method-outlook-link:hover {
+  text-decoration: underline;
+}
+
+.lfm-ending,
+.framework-ending,
+.mit-ending {
+ 
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.25;
+  font-weight: 400;
+  color: #111;
+  margin-bottom: 2rem;
+  font-weight: 800;
 }
