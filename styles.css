@@ -3166,3 +3166,271 @@ body.retrowalk-page {
   margin: 0 auto;
   padding-top: 0;
 }
+
+/* =========================
+   Method section (after RQ)
+   ========================= */
+
+   .lfm-method{
+    padding: 80px 0;
+  }
+  
+  .lfm-method-inner{
+    width: min(82vw, 1200px);   /* matches your hero/meta/rq width */
+    margin: 0 auto;
+  }
+  
+  .lfm-method-kicker{
+    display: inline-block;
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  
+  .lfm-method-title{
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 900;
+    font-size: clamp(22px, 3vw, 40px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    max-width: 28ch;
+  }
+  
+  .lfm-method-lead{
+    margin: 18px 0 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    max-width: 78ch;
+  }
+  
+  .lfm-method-lead strong{
+    font-weight: 650;
+  }
+
+  .lfm-method-grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin-top: 28px;
+  }
+  
+  .lfm-phase{
+    border: 1px solid rgba(0,0,0,.55);
+    border-radius: 18px;
+    overflow: hidden;
+    background: transparent;
+  }
+  
+  .lfm-phase-head{
+    padding: 18px 18px 0;
+  }
+  
+  .lfm-phase-tag{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #1f00ff;
+    color: #fff;
+    font-family: 'Sora', sans-serif;
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  
+  .lfm-phase-title{
+    margin: 14px 0 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  
+  .lfm-phase-block{
+    padding: 14px 18px 0;
+  }
+  
+  .lfm-phase-strong{
+    margin: 0 0 6px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  
+  .lfm-phase-normal{
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+    opacity: .9;
+  }
+  
+  .lfm-phase-strong strong{
+    font-weight: 650;
+  }
+  
+  .lfm-phase-media{
+    margin-top: 16px;
+    border-top: 1px solid rgba(0,0,0,.55);
+    background: #000;
+  }
+  
+  .lfm-phase-media video,
+  .lfm-phase-media img{
+    width: 100%;
+    height: 220px;
+    display: block;
+    object-fit: cover;
+    filter: grayscale(100%);
+  }
+  
+  @media (max-width: 900px){
+    .lfm-method-grid{ grid-template-columns: 1fr; }
+    .lfm-phase-media video,
+    .lfm-phase-media img{ height: 200px; }
+  }
+  
+  .lfm-phases{
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+  
+  .lfm-phase{
+    max-width: 880px;
+  }
+  
+  .lfm-phase-meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.2rem;
+    align-items: baseline;
+    margin-bottom: 0.8rem;
+  }
+  
+  .lfm-phase-label{
+    font-family: 'Sora', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #666;
+  }
+  
+  .lfm-phase-title{
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  
+  .lfm-phase-time{
+    font-size: 0.8rem;
+    color: #777;
+  }
+  
+  .lfm-phase-desc{
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 42rem;
+    margin: 0 0 1rem;
+  }
+  
+  .lfm-phase-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .lfm-phase-list li{
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-bottom: 0.4rem;
+  }
+  
+  .lfm-phase{
+    border: 1px solid rgba(0,0,0,0.35); /* lighter */
+    border-radius: 14px;
+    padding: 1.8rem 2rem;
+  }
+  
+  .lfm-phase-list li strong{
+    font-weight: 600;
+  }
+  .lfm-phase-list{
+    margin-top: 0.6rem;
+  }
+
+  /* === Emergent Themes (Analysis) === */
+
+.lfm-themes{
+  margin-top: 3.5rem;
+}
+
+.lfm-themes-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 3vw 3.5rem;
+}
+
+.lfm-themes-head{
+  max-width: 36rem;
+}
+
+.lfm-themes-head h2{
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin: 0.3rem 0 0;
+}
+
+.lfm-themes-grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  margin-top: 2.4rem;
+}
+
+/* Left text */
+.lfm-themes-text .theme-block{
+  margin-bottom: 1.8rem;
+}
+
+.lfm-themes-text h3{
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 0.3rem;
+}
+
+.lfm-themes-text p{
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Right schematic */
+.lfm-themes-map img{
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #f0f0f0;
+}
+
+.lfm-themes-map figcaption{
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .lfm-themes-grid{
+    grid-template-columns: 1fr;
+  }
+}
