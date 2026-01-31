@@ -20,25 +20,15 @@ h1, h2, h3, h4, h5, h6,
 /* ---------- Base & grid background ---------- */
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-body{
-  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.75;
-  color: #111;
-}
+
 
 h1{
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-title);
   font-weight: 900;
   font-size: clamp(20px, 3vw, 48px);
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0;
-}
-
-h1, h2, h3, .menu-text, .write-text, .lfm-kicker, .project-meta{
-  font-family: 'Sora', sans-serif;
 }
 
 .content{
@@ -3569,4 +3559,90 @@ body.retrowalk-page {
   color: #111;
   margin-bottom: 2rem;
   font-weight: 800;
+}
+
+/* ===============================
+   GENAI OPPORTUNITIES SECTION
+   =============================== */
+
+.lf-genai {
+  margin-top: clamp(3rem, 8vw, 6rem);
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+}
+
+.lf-genai .lf-intro-inner {
+  max-width: 780px;
+}
+
+.lf-genai p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #111;
+  margin-bottom: 1.5rem;
+}
+
+/* Slight emphasis for the first paragraph */
+.lf-genai p:first-child {
+  font-weight: 500;
+}
+
+/* Optional: subtle visual separation if placed between sections */
+.lf-genai::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+}
+
+/* ===============================
+   WIDE PROCESS IMAGE PANELS
+   =============================== */
+
+/* ===============================
+   WIDE + TALL PROCESS IMAGE PANELS (FULL-BLEED)
+   =============================== */
+
+.lf-processWide{
+  width: 100vw;                 /* make the section as wide as the viewport */
+  margin: clamp(3rem, 7vw, 6rem) 0;
+  padding: 0;                   /* remove side padding that caps width */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;           /* full-bleed trick */
+  margin-right: -50vw;
+}
+
+.lf-processFigure{
+  width: min(1300px, 90vw);     /* BIGGER than before; still centered */
+  margin: 0 auto clamp(2.5rem, 6vw, 4rem) auto;
+}
+
+.lf-processFigure img{
+  width: 100%;
+  height: clamp(300px, 30vw, 460px); /* ✅ THIS makes it taller */
+  display: block;
+  object-fit: cover;            /* ✅ fills the bigger box */
+  background: #111;             /* if image doesn’t fill (rare) */
+}
+
+.lf-processFigure figcaption{
+  margin-top: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(0,0,0,0.6);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Wide text block aligned with process images */
+.lf-intro-inner--wide {
+  max-width: 1800px;   /* SAME as .lf-processFigure */
+  margin-left: auto;
+  margin-right: auto;
 }
