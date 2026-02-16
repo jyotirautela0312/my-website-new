@@ -3608,26 +3608,32 @@ body.retrowalk-page {
 .lf-processWide{
   width: 100vw;                 /* make the section as wide as the viewport */
   margin: clamp(3rem, 7vw, 6rem) 0;
-  padding: 0;                   /* remove side padding that caps width */
+  padding: 0 clamp(1rem, 3vw, 2.5rem);                   /* remove side padding that caps width */
   position: relative;
   left: 50%;
   right: 50%;
   margin-left: -50vw;           /* full-bleed trick */
   margin-right: -50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .lf-processFigure{
-  width: min(1300px, 90vw);     /* BIGGER than before; still centered */
-  margin: 0 auto clamp(2.5rem, 6vw, 4rem) auto;
+  max-width: 1400px;
+  width: 100%;     /* BIGGER than before; still centered */
+  margin: 0 auto 3rem;
 }
 
-.lf-processFigure img{
-  width: 100%;
-  height: clamp(300px, 30vw, 460px); /* ✅ THIS makes it taller */
+.lf-processFigure > img{
+  width: 80%;
+  height: auto;
   display: block;
-  object-fit: cover;            /* ✅ fills the bigger box */
+  object-fit: contain;            /* ✅ fills the bigger box */
   background: #111;             /* if image doesn’t fill (rare) */
+  margin: 0 auto;
 }
+
 
 .lf-processFigure figcaption{
   margin-top: 0.9rem;
@@ -3637,6 +3643,7 @@ body.retrowalk-page {
   max-width: 900px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 
@@ -3646,3 +3653,280 @@ body.retrowalk-page {
   margin-left: auto;
   margin-right: auto;
 }
+
+.lf-twoUp{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.lf-twoUp-item{ margin: 0; }
+
+.lf-twoUp-item img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* make sure the "wide wrapper" actually has a width */
+.lf-processFigure{
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto 3rem auto;
+}
+
+/* 2-up grid inside the same wrapper width */
+.lf-twoUp{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.lf-twoUp-item{ margin: 0; }
+
+.lf-twoUp-item img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* FORCE the two-up block to match the visible width of .lf-processFigure img (80%) */
+.lf-twoUp{
+  width: 80%;
+  max-width: 1120px;          /* 80% of 1400px */
+  margin: 0 auto 3rem;
+}
+
+.lf-caption p{
+  margin: 0.35rem auto;
+  max-width: 900px;
+}
+
+.lf-caption-link{
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.lf-processFigure .lf-caption-link,
+.lf-processFigure .lf-caption-link:visited{
+  color: inherit;              /* removes default blue/purple */
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* Force caption paragraphs to look like figcaption (not like normal body <p>) */
+.lf-processFigure figcaption.lf-caption p{
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+
+.lf-processFigure figcaption.lf-caption{
+  margin-top: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(0,0,0,0.6);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Photo mosaic: same width as booklet pages (matches your working .lf-twoUp width) */
+.lf-photoMosaic{
+  width: 80%;
+  max-width: 1120px;              /* 80% of 1400 */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.lf-photoMosaic-item{
+  margin: 0;
+}
+
+.lf-photoMosaic-item--wide{
+  grid-column: 1 / -1;            /* span both columns */
+}
+
+.lf-photoMosaic-item img{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* stack on small screens */
+@media (max-width: 900px){
+  .lf-photoMosaic{
+    width: 100%;
+    max-width: 900px;
+    grid-template-columns: 1fr;
+  }
+  .lf-photoMosaic-item--wide{
+    grid-column: auto;
+  }
+}
+
+/* Photo mosaic: keep SAME width as booklet pages, but control height like reference */
+.lf-photoMosaic{
+  width: 80%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.lf-photoMosaic-item{
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* top image: wide, not too tall */
+.lf-photoMosaic-item--wide{
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;   /* adjust if you want slightly taller: 3/2 */
+}
+
+/* bottom two images */
+.lf-photoMosaic-item:not(.lf-photoMosaic-item--wide){
+  aspect-ratio: 4 / 3;    /* adjust if you want shorter: 3/2 */
+}
+
+.lf-photoMosaic-item img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* crops to fit like your reference */
+  display: block;
+}
+
+/* force single process images to match booklet-pages width */
+.lf-processFigure > img{
+  width: 80%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: block;
+}
+
+/* 3 images, same overall width as booklet pages */
+.lf-threeUp{
+  width: 80%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.lf-threeUp-item{ margin: 0; }
+
+.lf-threeUp-item img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* responsive */
+@media (max-width: 900px){
+  .lf-threeUp{ grid-template-columns: 1fr; }
+}
+
+/* 3-up block: same outer width as booklet pages */
+.lf-processFigure .lf-threeUp{
+  width: 80%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* IMPORTANT: override the global .lf-processFigure img { width:80% } */
+.lf-processFigure .lf-threeUp-item img{
+  width: 100% !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+/* make flex children stretch (your parent is align-items:center) */
+.lf-processWide > .lf-processFigure{
+  align-self: stretch;
+}
+
+/* 3-up: lock the grid width to match booklet pages */
+.lf-processFigure .lf-threeUp{
+  width: 80%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* 3-up: force equal tile height */
+.lf-processFigure .lf-threeUp-item{
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;     /* change to 3/2 if you want a bit shorter */
+}
+
+/* 3-up: fill the tile (this is the missing part) */
+.lf-processFigure .lf-threeUp-item img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+/* 3-up images: EXACT same visible width as booklet pages + consistent tile height */
+.lf-threeUpGrid{
+  width: 80%;
+  max-width: 1120px;                 /* same as your booklet pages */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.lf-threeTile{
+  overflow: hidden;
+  aspect-ratio: 4 / 3;               /* makes all three the same height */               /* optional */
+}
+
+.lf-threeTile img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                 /* clean crop like a gallery */
+  display: block;
+}
+
+/* mobile */
+@media (max-width: 900px){
+  .lf-threeUpGrid{
+    width: 100%;
+    max-width: 900px;
+    grid-template-columns: 1fr;
+  }
+  .lf-threeTile{
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Make spacing above and below this paragraph equal */
+.lf-betweenBlocks{
+  margin: 1.2rem auto 3rem;          /* same top and bottom */
+}
+
+/* Remove extra paragraph margins that add “mystery space” */
+.lf-betweenBlocks p{
+  margin: 0;
+}
+
+/* tighten space only between the section above and this paragraph */
+.lf-processWide + .lf-betweenBlocks{
+  margin-top: 1.2rem !important;
+}
+
+
