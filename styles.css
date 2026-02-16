@@ -3929,4 +3929,89 @@ body.retrowalk-page {
   margin-top: 1.2rem !important;
 }
 
+/* Reduce the large gap BELOW that specific processWide section */
+.lf-processWide--tightBottom{
+  margin-bottom: 1.25rem !important;
+}
+
+/* Also reduce the figure spacing inside that section (this is the big one) */
+.lf-processWide--tightBottom .lf-processFigure{
+  margin-bottom: 1.25rem !important;
+}
+
+/* Make the paragraph section not add extra top spacing */
+.project-body.lf-reviewText{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Control the paragraph block spacing exactly */
+.project-body.lf-reviewText .lf-intro-inner{
+  padding-top: 1.25rem !important;
+  padding-bottom: 1.25rem !important;
+}
+
+.project-body.lf-reviewText p{
+  margin: 0 !important;
+}
+
+/* 3 + 3 grid (sketches row, AI row) — same width as booklet pages */
+.lf-sixGrid{
+  width: 80%;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 28px);
+}
+
+.lf-sixItem{
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;         /* consistent tile height */
+  background: #fff;       /* optional */
+}
+
+.lf-sixItem img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* red number badge like your reference */
+.lf-sixBadge{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 38px;
+  height: 38px;
+  background: #d61f2c;
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+}
+
+/* mobile */
+@media (max-width: 900px){
+  .lf-sixGrid{
+    width: 100%;
+    max-width: 900px;
+    grid-template-columns: 1fr;
+  }
+  .lf-sixItem{
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Crop the 1st AI image from the TOP (keep bottom visible) */
+.lf-sixGrid .lf-sixItem:nth-child(4) img{
+  object-position: center 80%;
+}
+
+
 
